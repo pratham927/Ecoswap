@@ -1,0 +1,141 @@
+id,status,agb_code,flavor_name,family,roles,aliases,mapping_notes,review_note
+beef,reviewed,6254,beef,protein,filling|stew,ground_beef|lean_ground_beef|extra_lean_ground_beef|ground_chuck,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.,
+turkey,reviewed,36301,turkey,protein,filling|stew,ground_turkey|lean_ground_turkey|turkey_breast,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.,
+chicken,reviewed,36017,chicken,protein,filling|stew,ground_chicken|chicken_breast|boneless_skinless_chicken_breast|boneless_chicken_breast,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.,
+pork,reviewed,28001,pork,protein,filling|stew,ground_pork,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.,
+lamb,reviewed,21504,lamb,protein,filling|stew,ground_lamb,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.,
+tofu,reviewed,20904,tofu,protein,filling|stew,firm_tofu|extra_firm_tofu,,
+lentils,reviewed,20505,lentil,protein,filling|stew,lentil|cooked_lentil|cooked_lentils,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",
+chickpeas,reviewed,20507,chickpea,protein,filling|stew,chickpea|garbanzo_bean|garbanzo_beans|cooked_chickpeas,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",
+kidney_beans,reviewed,20503,kidney_bean,protein,filling|stew,kidney_bean|red_kidney_bean|red_kidney_beans,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",
+butter,reviewed,16400,butter,fat,saute|baking|spread,unsalted_butter|salted_butter,,
+margarine,reviewed,16615,margarine,fat,saute|baking|spread,unsalted_margarine,,
+olive_oil,reviewed,17270,olive_oil,fat,saute,extra_virgin_olive_oil,,
+canola_oil,reviewed,17130,canola_oil,fat,saute,rapeseed_oil,,
+milk,reviewed,19023,milk,liquid,sauce|batter|beverage,whole_milk,,
+soy_milk,reviewed,18900,soymilk,liquid,sauce|batter|beverage,soymilk|soy_milk|unsweetened_soymilk|unsweetened_soy_milk,,
+almond_milk,reviewed,18107,almond_milk,liquid,sauce|batter|beverage,unsweetened_almond_milk,,
+oat_milk,reviewed,18905,oat_milk,liquid,sauce|batter|beverage,oatmilk,,
+coconut_milk,reviewed,18041,coconut_milk,liquid,sauce|batter|beverage,unsweetened_coconut_milk,,
+cream,reviewed,19415,cream,liquid,sauce|batter,heavy_cream|heavy_whipping_cream|whipping_cream|fresh_cream,30% fat cream factor is a proxy for heavy/whipping cream; composition may differ.,
+yogurt,reviewed,19593,yogurt,liquid,sauce,plain_yogurt|plain_yoghurt|yoghurt,,
+greek_yogurt,reviewed,19860,greek_yogurt,liquid,sauce,plain_greek_yogurt,,
+cheddar,reviewed,12726,cheddar_cheese,cheese,topping|filling,cheddar_cheese|shredded_cheddar_cheese|sharp_cheddar_cheese,,
+mozzarella,reviewed,19590,mozzarella_cheese,cheese,topping|filling,mozzarella_cheese|shredded_mozzarella_cheese|fresh_mozzarella,,
+parmesan,reviewed,12120,parmesan_cheese,cheese,topping,parmesan_cheese|grated_parmesan_cheese,,
+feta,reviewed,12061,feta_cheese,cheese,topping|filling,feta_cheese|crumbled_feta_cheese,,
+rice,reviewed,9104,rice,grain,starch,cooked_rice|white_rice|long_grain_rice|cooked_white_rice,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",
+barley,reviewed,9322,barley,grain,starch,pearl_barley|pearled_barley|cooked_barley,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",
+pasta,reviewed,9811,pasta,grain,starch,cooked_pasta|spaghetti,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",
+potato,reviewed,4028,potato,vegetable,vegetable,potatoes|cooked_potatoes,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",
+onion,reviewed,20034,onion,vegetable,vegetable,onions,,
+tomato,reviewed,20047_1,tomato,vegetable,vegetable,tomatoes,,
+carrot,reviewed,20009,carrot,vegetable,vegetable,carrots,,
+garlic,reviewed,11000,garlic,aromatic,seasoning,garlic_clove|garlic_cloves|fresh_garlic,,
+spinach,reviewed,20059,spinach,vegetable,vegetable,fresh_spinach|baby_spinach,,
+flour,reviewed,9440,wheat_flour,baking,structure,all_purpose_flour|plain_flour|wheat_flour,,
+egg,reviewed,22000,egg,egg,binding,eggs|large_egg|large_eggs,,
+sugar,reviewed,31016,sugar,sweetener,sweetener,white_sugar|granulated_sugar,,"Changed family from seasoning to sweetener: the old family allowed sugar<->salt and sugar->pepper swaps, and new sweeteners need it."
+salt,reviewed,11017,salt,salt,salt,table_salt,,Changed family from seasoning to salt: the old family allowed spice->salt swaps such as pepper->salt and cayenne->salt.
+pepper,reviewed,11015,black_pepper,seasoning,seasoning,black_pepper|ground_black_pepper,,
+bread,reviewed,7002,bread,grain,starch,french_bread,,
+water,reviewed,18066,water,stock,stock,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+chicken_broth,reviewed,25947,chicken_broth,stock,stock,chicken_stock,Broth reconstituted from cube or powder with water; carton or homemade broth may differ.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+beef_broth,reviewed,25930,beef_broth,stock,stock,beef_stock,Broth reconstituted from cube or powder with water; carton or homemade broth may differ.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+vegetable_broth,reviewed,25948,vegetable_broth,stock,stock,vegetable_stock,Broth reconstituted from cube or powder with water; carton or homemade broth may differ.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+white_wine,reviewed,5215,white_wine,stock,stock,dry_white_wine,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+red_wine,reviewed,5214,red_wine,stock,stock,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+beer,reviewed,5001,beer,stock,stock,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+brown_sugar,reviewed,31017,brown_sugar,sweetener,sweetener,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+honey,reviewed,31008,honey,sweetener,sweetener,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+maple_syrup,reviewed,31034,maple_syrup,sweetener,sweetener,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+agave_nectar,reviewed,31089,agave_nectar,sweetener,sweetener,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+walnut,reviewed,15005,walnut,nut,topping|baking,,"Dried, husked walnut record.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+pecan,reviewed,15026,pecan,nut,topping|baking,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+almond,reviewed,15000,almond,nut,topping|baking,sliced_almond|slivered_almond,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+pine_nut,reviewed,15025,pine_nut,nut,topping|baking,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+cashew,reviewed,15019,cashew,nut,topping|baking,,"Only a grilled, salted cashew record exists; used as proxy for plain cashews.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+peanut_butter,reviewed,15202,peanut_butter,nut,spread|baking,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+coconut,reviewed,15007,coconut,nut,topping|baking,,"Dried coconut kernel record, used for shredded or desiccated coconut.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+sunflower_seed,reviewed,15011,sunflower_seed,nut,topping|baking,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+raisin,reviewed,13046,raisin,fruit,dried_fruit,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Dried fruit role: equal-mass swaps between raisins and fresh fruit compare a concentrated product with a watery one.
+dried_cranberry,rejected,13113,dried_cranberry,fruit,fruit,,PROXY: raw cranberry record; dried cranberries are likely higher per kg.,"Rejected: only a raw cranberry record exists; dried, sweetened cranberries are several times higher per kg, so savings against raisins would be wrong."
+blueberry,reviewed,13028,blueberry,fruit,fruit,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+banana,reviewed,13005,banana,fruit,fruit|puree,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Puree role added for mashed banana in baking.
+apple,reviewed,13039,apple,fruit,fruit,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+applesauce,reviewed,13038,applesauce,fruit,puree,unsweetened_applesauce,Apple compote record (sweetened); unsweetened applesauce is an alias.,"Reviewed by Claude on 2026-11-19 (not a human expert check). Puree role: applesauce replaces mashed banana, not whole berries."
+strawberry,reviewed,13014_1,strawberry,fruit,fruit,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+lemon,reviewed,13009,lemon,acid,acid,,,"Reviewed by Claude on 2026-11-19 (not a human expert check). Moved from fruit to acid: lemons are used for juice and zest, and the fruit family allowed blueberry->lemon."
+lime,reviewed,13067,lime,acid,acid,,,"Reviewed by Claude on 2026-11-19 (not a human expert check). Moved from fruit to acid, like lemon."
+lemon_juice,reviewed,2028,lemon_juice,acid,acid,fresh_lemon_juice,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+lime_juice,reviewed,13067,lime_juice,acid,acid,,PROXY: lime pulp record; no lime juice record in the snapshot.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+vinegar,reviewed,11018,vinegar,acid,acid,white_vinegar|red_wine_vinegar|white_wine_vinegar,"Generic vinegar record, also used for wine vinegars.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+apple_cider_vinegar,reviewed,11090,apple_cider_vinegar,acid,acid,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+balsamic_vinegar,reviewed,11091,balsamic_vinegar,acid,acid,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+orange_juice,reviewed,2012,orange_juice,juice,juice,,Juice reconstituted from concentrate.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new juice family: the acid family allowed vinegar->orange juice.
+apple_juice,reviewed,2074,apple_juice,juice,juice,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to the juice family.
+pineapple_juice,reviewed,2073,pineapple_juice,juice,juice,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to the juice family.
+vegetable_oil,reviewed,17700,vegetable_oil,fat,saute,oil,"Blended vegetable oil record. Saute only, like the other liquid oils.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+coconut_oil,reviewed,16060,coconut_oil,fat,saute|baking,,"Solid at room temperature, so baking is allowed unlike liquid oils.",Reviewed by Claude on 2026-11-19 (not a human expert check). Baking role kept: solid at room temperature and a standard butter replacement in baking.
+sesame_oil,reviewed,17400,sesame_oil,fat,saute,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+shortening,reviewed,16080,shortening,fat,baking,,PROXY: solid vegetable fat (margarine type) for frying.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+sour_cream,reviewed,19431,sour_cream,liquid,sauce|batter,,PROXY: thick cream 15-20% fat (creme fraiche type); US sour cream is about 20% fat.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+low_fat_sour_cream,reviewed,19433,low_fat_sour_cream,liquid,sauce|batter,,"Light cream 4-8% fat, liquid or thick.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+buttermilk,reviewed,19801,buttermilk,liquid,sauce|batter,,Plain fermented milk drink from skimmed milk.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+skim_milk,reviewed,19050,skim_milk,liquid,sauce|batter|beverage,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+evaporated_milk,reviewed,19026,evaporated_milk,liquid,sauce|batter,,Unsweetened condensed whole milk record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+half_and_half,reviewed,19430,half_and_half,liquid,sauce|batter|beverage,half_and_half_cream,PROXY: light liquid cream 15-20% fat; half-and-half is about 12% fat.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+mayonnaise,reviewed,11054,mayonnaise,liquid,sauce,,Full-fat mayonnaise record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+cream_cheese,reviewed,12315,cream_cheese,cheese,filling|spread,,"Uncured spreadable soft cheese, about 25% fat.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+cottage_cheese,reviewed,19641,cottage_cheese,cheese,filling|topping,,"PROXY: drained soft fresh cheese, about 6% fat.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+bacon,reviewed,28502,bacon,protein,filling|stew,,Smoked raw pork belly record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+ham,reviewed,28910,ham,protein,filling|stew,,Cooked ham record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+sausage,reviewed,30051,sausage,protein,filling|stew,italian_sausage,Raw pure pork sausage meat record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+shrimp,reviewed,10038,shrimp,protein,filling|stew,,Frozen raw shrimp record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+cooked_chicken,rejected,36018,cooked_chicken,protein,filling|stew,,"Cooked skinless chicken breast. Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",Rejected: same species as chicken in a different state; equal-mass swaps against raw meat records would be off by roughly the cooking water loss.
+black_bean,reviewed,20503,black_bean,protein,filling|stew,,"PROXY: cooked red kidney bean record. Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+egg_white,reviewed,22001,egg_white,egg,binding,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+oatmeal,reviewed,9311,oatmeal,grain,binder,,,"Reviewed by Claude on 2026-11-19 (not a human expert check). Binder role, shared with breadcrumbs; dry oats should not swap with cooked grains."
+breadcrumb,reviewed,7300,breadcrumb,grain,binder,,PROXY: rusk (dried bread) record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Binder role: dry crumbs should not swap gram for gram with cooked rice or pasta.
+flour_tortilla,reviewed,7815_1,flour_tortilla,grain,wrap,,,"Reviewed by Claude on 2026-11-19 (not a human expert check). Wrap role: tortillas swap with each other, not with rice."
+corn_tortilla,reviewed,7813,corn_tortilla,grain,wrap,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Wrap role.
+whole_wheat_flour,reviewed,9415,whole_wheat_flour,baking,structure,,"Wholemeal wheat flour, type 150.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+cornstarch,reviewed,9510,cornstarch,baking,thickener,,"Flour has no thickener role yet, so flour-cornstarch swaps stay blocked.","Reviewed by Claude on 2026-11-19 (not a human expert check). Flour not given a thickener role: cornstarch thickens about 2x flour by mass, so at the right ratio flour saves nothing."
+baking_powder,reviewed,11046,baking_powder,leavening,leavening,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+green_onion,reviewed,11003,green_onion,vegetable,vegetable,scallion,Chive or spring onion record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+shallot,reviewed,20097,shallot,vegetable,vegetable,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+celery,reviewed,20023,celery,vegetable,vegetable,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+zucchini,reviewed,20020,zucchini,vegetable,vegetable,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+broccoli,reviewed,20057,broccoli,vegetable,vegetable,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+leek,reviewed,20039,leek,vegetable,vegetable,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+sweet_potato,reviewed,4102,sweet_potato,vegetable,vegetable,,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities.",Reviewed by Claude on 2026-11-19 (not a human expert check).
+pea,reviewed,20084,pea,vegetable,vegetable,frozen_pea,Frozen raw garden peas record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+green_bean,reviewed,20061_1,green_bean,vegetable,vegetable,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+bell_pepper,reviewed,20041,bell_pepper,vegetable,vegetable,green_pepper|green_bell_pepper|red_bell_pepper,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+jalapeno,reviewed,20151,jalapeno,vegetable,vegetable,jalapeno_pepper,Raw chili pepper record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+canned_tomato,reviewed,20048,canned_tomato,vegetable,tomato,diced_tomato|rotel_tomato,"Peeled canned tomato, drained.","Reviewed by Claude on 2026-11-19 (not a human expert check). Tomato role: canned tomato and tomato sauce swap with each other, not with peppers."
+tomato_sauce,reviewed,20260,tomato_sauce,vegetable,tomato,,Canned tomato coulis (semi-reduced puree).,Reviewed by Claude on 2026-11-19 (not a human expert check). Tomato role.
+tomato_paste,reviewed,20068,tomato_paste,vegetable,paste,,,"Reviewed by Claude on 2026-11-19 (not a human expert check). Own role: paste is about 3x concentrated, so no catalogue item replaces it gram for gram."
+garlic_powder,reviewed,11023,garlic_powder,aromatic,seasoning,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+garlic_salt,rejected,11017,garlic_salt,aromatic,seasoning,,PROXY: salt record; garlic salt is mostly salt.,"Rejected: proxied by the salt record, so swapping garlic powder for it mostly means adding salt and the savings come from the proxy."
+onion_powder,reviewed,20180,onion_powder,aromatic,seasoning,,Dried onion record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+cayenne_pepper,reviewed,11088,cayenne_pepper,seasoning,seasoning,red_pepper_flake,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+chili_powder,reviewed,11088,chili_powder,seasoning,seasoning,,PROXY: cayenne pepper record for the chili powder blend.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+paprika,reviewed,11049,paprika,seasoning,seasoning,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+cinnamon,reviewed,11025,cinnamon,seasoning,sweet_spice,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Sweet spice role: separates warm baking spices from hot ones (the seasoning role allowed cayenne->nutmeg).
+nutmeg,reviewed,11048,nutmeg,seasoning,sweet_spice,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Sweet spice role.
+curry_powder,reviewed,11005,curry_powder,seasoning,seasoning,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+allspice,rejected,11056,allspice,seasoning,seasoning,,PROXY: mix of four spices record.,"Rejected: proxied by a spice-mix record (6.4) while single spices are about 9.4, which would create artificial savings against cinnamon and nutmeg."
+pumpkin_pie_spice,reviewed,11056,pumpkin_pie_spice,seasoning,sweet_spice,,PROXY: mix of four spices record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Sweet spice role. Kept: the spice-mix proxy is close to its cinnamon-heavy blend.
+italian_seasoning,reviewed,11060,italian_seasoning,herb,herb,,PROXY: dried Provence herbs record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new herb family so herbs do not swap with spices.
+vanilla,reviewed,11065,vanilla,seasoning,sweet_spice,vanilla_extract,Alcoholic vanilla extract record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Sweet spice role.
+parsley,reviewed,11014,parsley,herb,herb,fresh_parsley,Fresh parsley record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new herb family so herbs do not swap with spices.
+cilantro,reviewed,11094,cilantro,herb,herb,fresh_cilantro,Fresh coriander record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new herb family so herbs do not swap with spices.
+basil,reviewed,11033,basil,herb,herb,fresh_basil,Fresh basil record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new herb family so herbs do not swap with spices.
+oregano,reviewed,11035,oregano,herb,herb,,Dried oregano record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new herb family so herbs do not swap with spices.
+thyme,reviewed,11038,thyme,herb,herb,,Dried thyme record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new herb family so herbs do not swap with spices. Dried record kept: unqualified thyme in US recipes is usually dried.
+chive,reviewed,11003,chive,herb,herb,,Chive or spring onion record.,Reviewed by Claude on 2026-11-19 (not a human expert check). Moved to a new herb family so herbs do not swap with spices.
+ketchup,reviewed,11008,ketchup,condiment,condiment,,,Reviewed by Claude on 2026-11-19 (not a human expert check).
+soy_sauce,reviewed,11104,soy_sauce,condiment,seasoning,,,Reviewed by Claude on 2026-11-19 (not a human expert check). Own role: the shared condiment role allowed ketchup->soy sauce.
+chocolate_chip,reviewed,31085,chocolate_chip,chocolate,baking|topping,semi_sweet_chocolate_chip,Dark baking chocolate (40%+ cocoa) record.,Reviewed by Claude on 2026-11-19 (not a human expert check).
+onion,reviewed,,,,,red_onion|yellow_onion,,Reviewed by Claude on 2026-11-19 (not a human expert check).

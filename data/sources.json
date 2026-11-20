@@ -1,0 +1,47 @@
+{
+  "agribalyse_api.json": {
+    "url": "https://data.ademe.fr/data-fair/api/v1/datasets/agribalyse-31-synthese/lines?size=10000",
+    "sha256": "2578b2bd80fb92b28aab60216858c12283065beb3192f380f848115a5a205226"
+  },
+  "agribalyse_api_meta.json": {
+    "url": "https://data.ademe.fr/data-fair/api/v1/datasets/agribalyse-31-synthese",
+    "sha256": "3f3b11e715d58ffa353e1c040ca1dd745c688521759617de6d8c9dae46b220fc"
+  },
+  "nodes.csv": {
+    "url": "https://raw.githubusercontent.com/lamypark/FlavorGraph/master/input/nodes_191120.csv",
+    "sha256": "ea59d1858ae3a41de14aeabda32e6274693ea7897eb6ae1a3b7262bac5526d5a"
+  },
+  "edges.csv": {
+    "url": "https://raw.githubusercontent.com/lamypark/FlavorGraph/master/input/edges_191120.csv",
+    "sha256": "af2c2324f34fc44493ecf2711787a50f16cc8c61c474dfae64194517a3f51399"
+  },
+  "train_subs.pkl": {
+    "url": "https://dl.fbaipublicfiles.com/gismo/train_comments_subs.pkl",
+    "sha256": "b4d58e6c6c6747671e531812393397acf75c02d2a9ce00c2edcc7794bf567c81"
+  },
+  "val_subs.pkl": {
+    "url": "https://dl.fbaipublicfiles.com/gismo/val_comments_subs.pkl",
+    "sha256": "4d7e96837c051fbec7464346638942cb66b7841cb998dd6abe1382e2f2ddb3dd"
+  },
+  "test_subs.pkl": {
+    "url": "https://dl.fbaipublicfiles.com/gismo/test_comments_subs.pkl",
+    "sha256": "0758382cae59697958dd2a5e509c15f8d0417ea1a9e079fd75792779f1ce6174"
+  },
+  "recipe_information.csv": {
+    "url": "https://raw.githubusercontent.com/RaoulKalisvaart/green-recommender-systems/main/data/recipe-emissions/recipe_information.csv",
+    "sha256": "4e595a5c0f8d458ff628a219920cfd088af54c65dec1290d00cc00e4b00b792f"
+  },
+  "FlavorGraph_LICENSE.txt": {
+    "url": "https://raw.githubusercontent.com/lamypark/FlavorGraph/master/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "GISMo_LICENSE.md": {
+    "url": "https://raw.githubusercontent.com/facebookresearch/gismo/main/LICENSE.md",
+    "sha256": "336255dc30193e8e15d689d9481bb05673d89055718f3a96923a7ffb99adbbaf"
+  },
+  "agribalyse.xlsx": {
+    "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/641911",
+    "sha256": "27c65f05597028baff0e1a195f652e12b19c9493619dcaaeb17d3fe9f856362d",
+    "used_in_model": false
+  }
+}

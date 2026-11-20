@@ -1,0 +1,5 @@
+weights,support,context,chemistry,ranking,alpha,hit1_all_mapped,mrr_all_mapped
+hand_picked,0.6,0.2,0.2,evidence_only,0.0,0.22304122304122304,0.27775958078988383
+hand_picked,0.6,0.2,0.2,combined,0.5,0.1880971880971881,0.2516495077101138
+fitted,0.95,0.05,0.0,evidence_only,0.0,0.22331422331422332,0.2780608462426644
+fitted,0.95,0.05,0.0,combined,0.5,0.19301119301119302,0.25567417385599206

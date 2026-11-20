@@ -1,0 +1,15 @@
+{
+  "original_gismo_test_records": 10747,
+  "mapped_test_records": 3663,
+  "excluded_train_recipe_id_overlap": 0,
+  "evaluated_test_records": 3663,
+  "unique_test_recipes": 2688,
+  "recipe_emissions_records_inspected": 5595,
+  "recipe_emissions_used_for_quantities": false,
+  "reason": "Example recipe 79222: 14-ounce can is recorded as 28.35 g; dash cayenne as 142 g. Automatic quantity conversions not accepted.",
+  "curated_scenarios": 24,
+  "taste_pilot_completed": false,
+  "benchmark_scope": "Observed substitute recovery within a manually mapped catalogue; not taste accuracy. Unknown ingredients excluded; mapped but unreachable targets count as misses.",
+  "candidate_design": "Only training-supported, same-family, role-compatible and lower-carbon pairs. No test pair added to catalogue rules.",
+  "scenario_scope": "Author-defined scenarios, not an unbiased sample of real-world recipes."
+}

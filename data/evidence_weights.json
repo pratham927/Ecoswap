@@ -1,0 +1,123 @@
+{
+  "weights": {
+    "support": 0.95,
+    "context": 0.05,
+    "chemistry": 0.0
+  },
+  "hand_picked": {
+    "support": 0.6,
+    "context": 0.2,
+    "chemistry": 0.2
+  },
+  "selection": "Maximum validation MRR averaged over carbon priorities [0, 0.25, 0.5, 0.75] on a 0.05 simplex grid; ties by closeness to the hand-picked weights. Support weight kept above zero.",
+  "validation": {
+    "records": 3590,
+    "reachable_targets": 1293,
+    "grid_points": 210,
+    "learned": {
+      "mean_mrr": 0.2518022595634021,
+      "mrr_by_alpha": {
+        "0": 0.2739168746759282,
+        "0.25": 0.2677302471592171,
+        "0.5": 0.2524999196099478,
+        "0.75": 0.21306199680851515
+      }
+    },
+    "hand_picked": {
+      "mean_mrr": 0.24843963912905467,
+      "mrr_by_alpha": {
+        "0": 0.27354036786488106,
+        "0.25": 0.26595990747105014,
+        "0.5": 0.24665623605735065,
+        "0.75": 0.2076020451229368
+      }
+    }
+  },
+  "evidence_only_optimum": {
+    "weights": {
+      "support": 0.65,
+      "context": 0.35,
+      "chemistry": 0.0
+    },
+    "mean_mrr": 0.24693457907768535,
+    "mrr_by_alpha": {
+      "0": 0.276824291462175,
+      "0.25": 0.2665071627536814,
+      "0.5": 0.24158336247472773,
+      "0.75": 0.20282349962015722
+    },
+    "note": "Best weights when ranking on evidence alone (carbon priority 0). Not used: their smaller score scale makes the carbon term dominate at the default carbon priority."
+  },
+  "next_best": [
+    {
+      "weights": {
+        "support": 1.0,
+        "context": 0.0,
+        "chemistry": 0.0
+      },
+      "mean_mrr": 0.2516963959129701,
+      "mrr_by_alpha": {
+        "0": 0.2732133210336558,
+        "0.25": 0.2676157315293812,
+        "0.5": 0.2525330805066184,
+        "0.75": 0.21342345058222514
+      }
+    },
+    {
+      "weights": {
+        "support": 0.9,
+        "context": 0.05,
+        "chemistry": 0.05
+      },
+      "mean_mrr": 0.25164093180109937,
+      "mrr_by_alpha": {
+        "0": 0.2740236527632076,
+        "0.25": 0.2677534597868866,
+        "0.5": 0.25282489639732003,
+        "0.75": 0.21196171825698315
+      }
+    },
+    {
+      "weights": {
+        "support": 0.95,
+        "context": 0.0,
+        "chemistry": 0.05
+      },
+      "mean_mrr": 0.25144105700860614,
+      "mrr_by_alpha": {
+        "0": 0.2729347695016224,
+        "0.25": 0.267708582040059,
+        "0.5": 0.2526259310172962,
+        "0.75": 0.2124949454754471
+      }
+    },
+    {
+      "weights": {
+        "support": 0.9,
+        "context": 0.0,
+        "chemistry": 0.1
+      },
+      "mean_mrr": 0.25134592040580933,
+      "mrr_by_alpha": {
+        "0": 0.2732133210336558,
+        "0.25": 0.26753694927789684,
+        "0.5": 0.25239380474060163,
+        "0.75": 0.21223960657108312
+      }
+    },
+    {
+      "weights": {
+        "support": 0.9,
+        "context": 0.1,
+        "chemistry": 0.0
+      },
+      "mean_mrr": 0.2513114657317308,
+      "mrr_by_alpha": {
+        "0": 0.2737775989099115,
+        "0.25": 0.267635849140028,
+        "0.5": 0.2524244233018608,
+        "0.75": 0.21140799157512277
+      }
+    }
+  ]
+}

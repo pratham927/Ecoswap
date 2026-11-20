@@ -1,0 +1,196 @@
+{
+  "benchmark": [
+    {
+      "method": "carbon_only",
+      "mapped_test_records": 3663,
+      "candidate_target_coverage": 0.3658203658203658,
+      "abstentions": 927,
+      "hit1_all_mapped": 0.10647010647010648,
+      "hit5_all_mapped": 0.3063063063063063,
+      "mrr_all_mapped": 0.17810705537978266,
+      "feasible_target_records": 1340,
+      "hit1_feasible": 0.291044776119403,
+      "mrr_feasible": 0.4868702566090626
+    },
+    {
+      "method": "flavor_only",
+      "mapped_test_records": 3663,
+      "candidate_target_coverage": 0.3658203658203658,
+      "abstentions": 927,
+      "hit1_all_mapped": 0.13431613431613432,
+      "hit5_all_mapped": 0.3437073437073437,
+      "mrr_all_mapped": 0.2091625402231463,
+      "feasible_target_records": 1340,
+      "hit1_feasible": 0.36716417910447763,
+      "mrr_feasible": 0.5717629737592425
+    },
+    {
+      "method": "frequency",
+      "mapped_test_records": 3663,
+      "candidate_target_coverage": 0.3658203658203658,
+      "abstentions": 927,
+      "hit1_all_mapped": 0.2214032214032214,
+      "hit5_all_mapped": 0.3527163527163527,
+      "mrr_all_mapped": 0.2771524998797726,
+      "feasible_target_records": 1340,
+      "hit1_feasible": 0.6052238805970149,
+      "mrr_feasible": 0.7576191097459755
+    },
+    {
+      "method": "combined",
+      "mapped_test_records": 3663,
+      "candidate_target_coverage": 0.3658203658203658,
+      "abstentions": 927,
+      "hit1_all_mapped": 0.19301119301119302,
+      "hit5_all_mapped": 0.33715533715533713,
+      "mrr_all_mapped": 0.25567417385599206,
+      "feasible_target_records": 1340,
+      "hit1_feasible": 0.5276119402985074,
+      "mrr_feasible": 0.6989063424138051
+    }
+  ],
+  "scenarios": [
+    {
+      "method": "carbon_only",
+      "scenarios": 24,
+      "mean_recipe_reduction_pct": 53.22743917963419,
+      "median_recipe_reduction_pct": 50.11385168901241,
+      "total_scenario_kg_co2e_saved": 85.822658,
+      "positive_savings_under_20pct_stress": 19,
+      "chemical_evidence_available": 15
+    },
+    {
+      "method": "flavor_only",
+      "scenarios": 24,
+      "mean_recipe_reduction_pct": 39.5160594842542,
+      "median_recipe_reduction_pct": 37.218831065180176,
+      "total_scenario_kg_co2e_saved": 70.75280000000001,
+      "positive_savings_under_20pct_stress": 13,
+      "chemical_evidence_available": 21
+    },
+    {
+      "method": "frequency",
+      "scenarios": 24,
+      "mean_recipe_reduction_pct": 43.25427517125273,
+      "median_recipe_reduction_pct": 38.05139936864628,
+      "total_scenario_kg_co2e_saved": 74.23064000000001,
+      "positive_savings_under_20pct_stress": 17,
+      "chemical_evidence_available": 19
+    },
+    {
+      "method": "combined",
+      "scenarios": 24,
+      "mean_recipe_reduction_pct": 38.411580643386394,
+      "median_recipe_reduction_pct": 37.58538876675931,
+      "total_scenario_kg_co2e_saved": 64.287715,
+      "positive_savings_under_20pct_stress": 19,
+      "chemical_evidence_available": 16
+    }
+  ],
+  "audit": {
+    "original_gismo_test_records": 10747,
+    "mapped_test_records": 3663,
+    "excluded_train_recipe_id_overlap": 0,
+    "evaluated_test_records": 3663,
+    "unique_test_recipes": 2688,
+    "recipe_emissions_records_inspected": 5595,
+    "recipe_emissions_used_for_quantities": false,
+    "reason": "Example recipe 79222: 14-ounce can is recorded as 28.35 g; dash cayenne as 142 g. Automatic quantity conversions not accepted.",
+    "curated_scenarios": 24,
+    "taste_pilot_completed": false,
+    "benchmark_scope": "Observed substitute recovery within a manually mapped catalogue; not taste accuracy. Unknown ingredients excluded; mapped but unreachable targets count as misses.",
+    "candidate_design": "Only training-supported, same-family, role-compatible and lower-carbon pairs. No test pair added to catalogue rules.",
+    "scenario_scope": "Author-defined scenarios, not an unbiased sample of real-world recipes."
+  },
+  "evidence_weights": {
+    "in_use": {
+      "support": 0.95,
+      "context": 0.05,
+      "chemistry": 0.0
+    },
+    "hand_picked": {
+      "support": 0.6,
+      "context": 0.2,
+      "chemistry": 0.2
+    },
+    "test": [
+      {
+        "weights": "hand_picked",
+        "support": 0.6,
+        "context": 0.2,
+        "chemistry": 0.2,
+        "ranking": "evidence_only",
+        "alpha": 0.0,
+        "hit1_all_mapped": 0.22304122304122304,
+        "mrr_all_mapped": 0.27775958078988383
+      },
+      {
+        "weights": "hand_picked",
+        "support": 0.6,
+        "context": 0.2,
+        "chemistry": 0.2,
+        "ranking": "combined",
+        "alpha": 0.5,
+        "hit1_all_mapped": 0.1880971880971881,
+        "mrr_all_mapped": 0.2516495077101138
+      },
+      {
+        "weights": "fitted",
+        "support": 0.95,
+        "context": 0.05,
+        "chemistry": 0.0,
+        "ranking": "evidence_only",
+        "alpha": 0.0,
+        "hit1_all_mapped": 0.22331422331422332,
+        "mrr_all_mapped": 0.2780608462426644
+      },
+      {
+        "weights": "fitted",
+        "support": 0.95,
+        "context": 0.05,
+        "chemistry": 0.0,
+        "ranking": "combined",
+        "alpha": 0.5,
+        "hit1_all_mapped": 0.19301119301119302,
+        "mrr_all_mapped": 0.25567417385599206
+      }
+    ],
+    "test_mrr_difference": {
+      "evidence_only": {
+        "mrr_difference": 0.0003012654527805858,
+        "ci95_low": -0.0015912893912354684,
+        "ci95_high": 0.002116236937665509,
+        "resamples": 2000
+      },
+      "combined": {
+        "mrr_difference": 0.004024666145878264,
+        "ci95_low": 0.0019523999050138634,
+        "ci95_high": 0.006201423300960967,
+        "resamples": 2000
+      }
+    },
+    "validation": {
+      "records": 3590,
+      "reachable_targets": 1293,
+      "grid_points": 210,
+      "learned": {
+        "mean_mrr": 0.2518022595634021,
+        "mrr_by_alpha": {
+          "0": 0.2739168746759282,
+          "0.25": 0.2677302471592171,
+          "0.5": 0.2524999196099478,
+          "0.75": 0.21306199680851515
+        }
+      },
+      "hand_picked": {
+        "mean_mrr": 0.24843963912905467,
+        "mrr_by_alpha": {
+          "0": 0.27354036786488106,
+          "0.25": 0.26595990747105014,
+          "0.5": 0.24665623605735065,
+          "0.75": 0.2076020451229368
+        }
+      }
+    }
+  }
+}

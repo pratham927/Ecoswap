@@ -1,0 +1,136 @@
+id,mapping_status,agb_code,agb_name,factor,factor_unit,dqr,flavor_node,flavor_name,compound_count,mapping_notes
+beef,reviewed,6254,"Beef, minced steak, 15% fat, raw",35.7,kg CO2e / kg food in mapped state,2.89,361,beef,92,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.
+turkey,reviewed,36301,"Turkey, meat, raw",4.56,kg CO2e / kg food in mapped state,2.13,6508,turkey,17,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.
+chicken,reviewed,36017,"Chicken, breast, without skin, raw",5.58,kg CO2e / kg food in mapped state,2.09,1138,chicken,131,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.
+pork,reviewed,28001,"Pork, shoulder, raw",6.78,kg CO2e / kg food in mapped state,2.85,4966,pork,157,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.
+lamb,reviewed,21504,"Lamb, shoulder, raw",33.0,kg CO2e / kg food in mapped state,2.97,3636,lamb,37,Generic species chemical profile; carbon record uses the specified cut/state. Ground variants use this proxy.
+tofu,reviewed,20904,"Tofu, plain",1.0,kg CO2e / kg food in mapped state,2.04,6434,tofu,9,
+lentils,reviewed,20505,"Lentil, cooked",0.466,kg CO2e / kg food in mapped state,2.77,3781,lentil,103,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+chickpeas,reviewed,20507,"Chick pea, cooked",0.603,kg CO2e / kg food in mapped state,2.71,1204,chickpea,103,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+kidney_beans,reviewed,20503,"Red kidney bean, cooked",0.585,kg CO2e / kg food in mapped state,3.13,3572,kidney_bean,91,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+butter,reviewed,16400,"Butter, 82% fat, unsalted",7.94,kg CO2e / kg food in mapped state,1.09,781,butter,131,
+margarine,reviewed,16615,"Vegetable fat (margarine type), 80% fat, unsalted",2.36,kg CO2e / kg food in mapped state,2,4076,margarine,4,
+olive_oil,reviewed,17270,"Olive oil, extra virgin",1.63,kg CO2e / kg food in mapped state,2.21,4472,olive_oil,0,
+canola_oil,reviewed,17130,Rapeseed oil,2.5,kg CO2e / kg food in mapped state,1.99,960,canola_oil,153,
+milk,reviewed,19023,"Milk, whole, UHT",1.46,kg CO2e / kg food in mapped state,1.21,4204,milk,111,
+soy_milk,reviewed,18900,"Soy drink, plain, prepacked",0.427,kg CO2e / kg food in mapped state,2.06,6007,soymilk,0,
+almond_milk,reviewed,18107,"Almond drink not sweet, not fortified, prepacked",0.381,kg CO2e / kg food in mapped state,2.35,103,almond_milk,0,
+oat_milk,reviewed,18905,"Oat-based drink, plain, prepacked",0.566,kg CO2e / kg food in mapped state,2.09,,oat_milk,0,
+coconut_milk,reviewed,18041,Coconut milk or coconut cream,0.682,kg CO2e / kg food in mapped state,2.6,1444,coconut_milk,0,
+cream,reviewed,19415,"Liquid cream 30% fat, UHT",3.75,kg CO2e / kg food in mapped state,1.24,1681,cream,5,30% fat cream factor is a proxy for heavy/whipping cream; composition may differ.
+yogurt,reviewed,19593,"Yogurt, fermented milk or dairy specialty, plain",1.89,kg CO2e / kg food in mapped state,1.22,7087,yogurt,31,
+greek_yogurt,reviewed,19860,"Yogurt, Greek-style, plain",1.89,kg CO2e / kg food in mapped state,1.22,2975,greek_yogurt,0,
+cheddar,reviewed,12726,"Cheddar cheese, from cow's milk",6.65,kg CO2e / kg food in mapped state,1.79,1083,cheddar_cheese,148,
+mozzarella,reviewed,19590,"Mozzarella cheese, from cow's milk",4.77,kg CO2e / kg food in mapped state,1.78,4309,mozzarella_cheese,120,
+parmesan,reviewed,12120,"Parmesan cheese, from cow's milk",6.27,kg CO2e / kg food in mapped state,1.77,4615,parmesan_cheese,165,
+feta,reviewed,12061,"Feta cheese, from ewe's milk",6.37,kg CO2e / kg food in mapped state,2.38,2320,feta_cheese,116,
+rice,reviewed,9104,"Rice, cooked, unsalted",1.16,kg CO2e / kg food in mapped state,3.73,5431,rice,199,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+barley,reviewed,9322,"Pearled barley, boiled/cooked in water, unsalted",0.4,kg CO2e / kg food in mapped state,2.33,321,barley,141,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+pasta,reviewed,9811,"Dried pasta, cooked, unsalted",1.02,kg CO2e / kg food in mapped state,3.12,4635,pasta,95,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+potato,reviewed,4028,"Ware potato, boiled/cooked in water, peeled",1.15,kg CO2e / kg food in mapped state,2.56,5027,potato,254,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+onion,reviewed,20034,"Onion, raw",0.421,kg CO2e / kg food in mapped state,2.39,4478,onion,180,
+tomato,reviewed,20047_1,"Tomato, raw",0.75,kg CO2e / kg food in mapped state,2.77,6441,tomato,271,
+carrot,reviewed,20009,"Carrot, raw",0.396,kg CO2e / kg food in mapped state,2.24,1005,carrot,191,
+garlic,reviewed,11000,"Garlic, fresh",0.383,kg CO2e / kg food in mapped state,2.88,2793,garlic,143,
+spinach,reviewed,20059,"Spinach, raw",0.423,kg CO2e / kg food in mapped state,2.58,6051,spinach,137,
+flour,reviewed,9440,"Wheat flour, type 55 (for pastry)",0.791,kg CO2e / kg food in mapped state,2.87,6812,wheat_flour,0,
+egg,reviewed,22000,"Egg, raw",1.88,kg CO2e / kg food in mapped state,2.44,2188,egg,55,
+sugar,reviewed,31016,"Sugar, white",0.746,kg CO2e / kg food in mapped state,3.09,6172,sugar,5,
+salt,reviewed,11017,"Salt, white, for human consumption (sea, igneous or rock), no enrichment",0.632,kg CO2e / kg food in mapped state,2.32,5608,salt,4,
+pepper,reviewed,11015,"Black pepper, powder",9.4,kg CO2e / kg food in mapped state,2.62,499,black_pepper,0,
+bread,reviewed,7002,"Bread, French bread (baguette or ball), with yeast",0.748,kg CO2e / kg food in mapped state,2.2,668,bread,129,
+water,reviewed,18066,Tap water,0.000342,kg CO2e / kg food in mapped state,2.5,6787,water,4,
+chicken_broth,reviewed,25947,"Broth, stock or bouillon, poultry, reconstituted with water at consumer",0.103,kg CO2e / kg food in mapped state,2.23,1153,chicken_broth,0,Broth reconstituted from cube or powder with water; carton or homemade broth may differ.
+beef_broth,reviewed,25930,"Broth, stock or bouillon, beef, reconstituted with water at consumer",0.113,kg CO2e / kg food in mapped state,2.14,371,beef_broth,0,Broth reconstituted from cube or powder with water; carton or homemade broth may differ.
+vegetable_broth,reviewed,25948,"Broth, stock or bouillon, vegetables, reconstituted with water at consumer",0.1,kg CO2e / kg food in mapped state,2.18,6708,vegetable_broth,0,Broth reconstituted from cube or powder with water; carton or homemade broth may differ.
+white_wine,reviewed,5215,"Wine, white, dry",1.5,kg CO2e / kg food in mapped state,2.18,6918,white_wine,225,
+red_wine,reviewed,5214,"Wine, red",1.27,kg CO2e / kg food in mapped state,2.16,5345,red_wine,167,
+beer,reviewed,5001,"Beer, regular (4-5° alcohol)",1.35,kg CO2e / kg food in mapped state,2.24,423,beer,263,
+brown_sugar,reviewed,31017,"Sugar, brown",1.04,kg CO2e / kg food in mapped state,3.15,747,brown_sugar,0,
+honey,reviewed,31008,Honey,1.57,kg CO2e / kg food in mapped state,2.53,3290,honey,60,
+maple_syrup,reviewed,31034,"Syrup, maple",2.3,kg CO2e / kg food in mapped state,1.4,4071,maple_syrup,0,
+agave_nectar,reviewed,31089,"Syrup, agave",5.63,kg CO2e / kg food in mapped state,2.97,62,agave_nectar,0,
+walnut,reviewed,15005,"Walnut, dried, husked",4.11,kg CO2e / kg food in mapped state,2.84,6775,walnut,135,"Dried, husked walnut record."
+pecan,reviewed,15026,Pecan nut,3.66,kg CO2e / kg food in mapped state,2.73,4716,pecan,148,
+almond,reviewed,15000,"Almond, (with peel)",2.63,kg CO2e / kg food in mapped state,3.1,88,almond,130,
+pine_nut,reviewed,15025,Pine nuts,4.18,kg CO2e / kg food in mapped state,3.7,4845,pine_nut,0,
+cashew,reviewed,15019,"Cashew nut, grilled, salted",3.56,kg CO2e / kg food in mapped state,3.66,1011,cashew,0,"Only a grilled, salted cashew record exists; used as proxy for plain cashews."
+peanut_butter,reviewed,15202,Peanut butter or peanut paste,4.06,kg CO2e / kg food in mapped state,3.13,4689,peanut_butter,9,
+coconut,reviewed,15007,"Coconut, kernel, dried",2.42,kg CO2e / kg food in mapped state,3.93,1430,coconut,161,"Dried coconut kernel record, used for shredded or desiccated coconut."
+sunflower_seed,reviewed,15011,Sunflower seed,2.91,kg CO2e / kg food in mapped state,2.57,6221,sunflower_seed,0,
+raisin,reviewed,13046,Raisin,1.23,kg CO2e / kg food in mapped state,3.18,5190,raisin,23,
+blueberry,reviewed,13028,"Blueberry, raw",0.922,kg CO2e / kg food in mapped state,3.49,547,blueberry,152,
+banana,reviewed,13005,"Banana, pulp, raw",0.909,kg CO2e / kg food in mapped state,2.61,302,banana,206,
+apple,reviewed,13039,"Apple, pulp and peel, raw",0.408,kg CO2e / kg food in mapped state,2.01,158,apple,300,
+applesauce,reviewed,13038,Apple compote,1.17,kg CO2e / kg food in mapped state,1.87,174,applesauce,0,Apple compote record (sweetened); unsweetened applesauce is an alias.
+strawberry,reviewed,13014_1,"Strawberry, raw",0.533,kg CO2e / kg food in mapped state,2.41,6131,strawberry,257,
+lemon,reviewed,13009,"Lemon, pulp, raw",0.764,kg CO2e / kg food in mapped state,2.72,3720,lemon,193,
+lime,reviewed,13067,"Lime, pulp, raw",0.57,kg CO2e / kg food in mapped state,3.69,3840,lime,164,
+lemon_juice,reviewed,2028,"Lemon juice, pure juice",0.837,kg CO2e / kg food in mapped state,2.22,3743,lemon_juice,0,
+lime_juice,reviewed,13067,"Lime, pulp, raw",0.57,kg CO2e / kg food in mapped state,3.69,3847,lime_juice,0,PROXY: lime pulp record; no lime juice record in the snapshot.
+vinegar,reviewed,11018,Vinegar,0.96,kg CO2e / kg food in mapped state,2.92,6756,vinegar,49,"Generic vinegar record, also used for wine vinegars."
+apple_cider_vinegar,reviewed,11090,"Vinegar, cider",0.841,kg CO2e / kg food in mapped state,2.5,163,apple_cider_vinegar,16,
+balsamic_vinegar,reviewed,11091,"Vinegar, balsamic",0.96,kg CO2e / kg food in mapped state,2.92,299,balsamic_vinegar,0,
+orange_juice,reviewed,2012,"Orange juice, reconstituted from a concentrate",0.906,kg CO2e / kg food in mapped state,2.82,4516,orange_juice,0,Juice reconstituted from concentrate.
+apple_juice,reviewed,2074,"Apple juice, pure juice",0.567,kg CO2e / kg food in mapped state,2.43,165,apple_juice,0,
+pineapple_juice,reviewed,2073,"Pineapple juice, pure juice",1.25,kg CO2e / kg food in mapped state,2.68,4855,pineapple_juice,0,
+vegetable_oil,reviewed,17700,Combined oil (blended vegetable oils),2.5,kg CO2e / kg food in mapped state,1.96,6711,vegetable_oil,0,"Blended vegetable oil record. Saute only, like the other liquid oils."
+coconut_oil,reviewed,16060,Coconut oil (coprah),4.28,kg CO2e / kg food in mapped state,1.78,1446,coconut_oil,0,"Solid at room temperature, so baking is allowed unlike liquid oils."
+sesame_oil,reviewed,17400,Sesame oil,3.94,kg CO2e / kg food in mapped state,1.98,5747,sesame_oil,0,
+shortening,reviewed,16080,"Solid vegetable fat (margarine type), for frying",2.58,kg CO2e / kg food in mapped state,2,5800,shortening,3,PROXY: solid vegetable fat (margarine type) for frying.
+sour_cream,reviewed,19431,"Thick cream, light, 15-20% fat, refrigerated",2.69,kg CO2e / kg food in mapped state,1.32,5968,sour_cream,0,PROXY: thick cream 15-20% fat (creme fraiche type); US sour cream is about 20% fat.
+low_fat_sour_cream,reviewed,19433,"cream, light, 4 to 8% fat, liquid or thick",2.12,kg CO2e / kg food in mapped state,1.4,3965,low_fat_sour_cream,0,"Light cream 4-8% fat, liquid or thick."
+buttermilk,reviewed,19801,"Fermented milk drink, plain, skimmed milk",1.66,kg CO2e / kg food in mapped state,1.24,805,buttermilk,16,Plain fermented milk drink from skimmed milk.
+skim_milk,reviewed,19050,"Milk, skimmed, UHT",1.15,kg CO2e / kg food in mapped state,1.26,5833,skim_milk,0,
+evaporated_milk,reviewed,19026,"Condensed milk, without sugar, whole",2.53,kg CO2e / kg food in mapped state,1.16,2239,evaporated_milk,2,Unsweetened condensed whole milk record.
+half_and_half,reviewed,19430,"Liquid cream, light, 15-20% fat, UHT",2.6,kg CO2e / kg food in mapped state,1.33,3153,half_and_half,0,PROXY: light liquid cream 15-20% fat; half-and-half is about 12% fat.
+mayonnaise,reviewed,11054,Mayonnaise (70% fat and more),2.69,kg CO2e / kg food in mapped state,1.96,4116,mayonnaise,0,Full-fat mayonnaise record.
+cream_cheese,reviewed,12315,"Uncured soft cheese, spreadable, around 25% fat, in a tub",5.16,kg CO2e / kg food in mapped state,2.45,1682,cream_cheese,116,"Uncured spreadable soft cheese, about 25% fat."
+cottage_cheese,reviewed,19641,"Drained soft fresh cheese, around 6% fat",5.3,kg CO2e / kg food in mapped state,1.79,1631,cottage_cheese,117,"PROXY: drained soft fresh cheese, about 6% fat."
+bacon,reviewed,28502,"Pork belly, smoked, raw",6.58,kg CO2e / kg food in mapped state,2.85,267,bacon,0,Smoked raw pork belly record.
+ham,reviewed,28910,"Cooked ham, choice",7.65,kg CO2e / kg food in mapped state,2.97,3161,ham,6,Cooked ham record.
+sausage,reviewed,30051,"Sausage meat, pure pork, raw",5.39,kg CO2e / kg food in mapped state,2.44,5653,sausage,5,Raw pure pork sausage meat record.
+shrimp,reviewed,10038,"Shrimp, frozen, raw",19.9,kg CO2e / kg food in mapped state,3.47,5809,shrimp,76,Frozen raw shrimp record.
+black_bean,reviewed,20503,"Red kidney bean, cooked",0.585,kg CO2e / kg food in mapped state,3.13,470,black_bean,0,"PROXY: cooked red kidney bean record. Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+egg_white,reviewed,22001,"Egg white, raw",2.07,kg CO2e / kg food in mapped state,3,2196,egg_white,0,
+oatmeal,reviewed,9311,Oatmeal flakes,1.22,kg CO2e / kg food in mapped state,4.27,4447,oatmeal,0,
+breadcrumb,reviewed,7300,Rusk,1.44,kg CO2e / kg food in mapped state,2.09,680,breadcrumb,0,PROXY: rusk (dried bread) record.
+flour_tortilla,reviewed,7815_1,"Wheat tortilla wrap, to be filled",1.24,kg CO2e / kg food in mapped state,2.03,2397,flour_tortilla,0,
+corn_tortilla,reviewed,7813,"Corn tortilla wrap, to be filled",1.03,kg CO2e / kg food in mapped state,2.05,1612,corn_tortilla,0,
+whole_wheat_flour,reviewed,9415,"Wheat flour, type 150",0.791,kg CO2e / kg food in mapped state,2.87,6988,whole_wheat_flour,0,"Wholemeal wheat flour, type 150."
+cornstarch,reviewed,9510,Maize/corn starch,1.55,kg CO2e / kg food in mapped state,3.48,1625,cornstarch,0,"Flour has no thickener role yet, so flour-cornstarch swaps stay blocked."
+baking_powder,reviewed,11046,Baking powder or raising agent,2.11,kg CO2e / kg food in mapped state,1.56,292,baking_powder,0,
+green_onion,reviewed,11003,"Chive or spring onion, fresh",0.739,kg CO2e / kg food in mapped state,2.5,3016,green_onion,0,Chive or spring onion record.
+shallot,reviewed,20097,"Shallot, raw",0.394,kg CO2e / kg food in mapped state,3.16,5759,shallot,108,
+celery,reviewed,20023,"Celery stalk, raw",0.715,kg CO2e / kg food in mapped state,2.88,1041,celery,217,
+zucchini,reviewed,20020,"Courgette or zucchini, pulp and peel, raw",0.498,kg CO2e / kg food in mapped state,2.95,7101,zucchini,0,
+broccoli,reviewed,20057,"Broccoli, raw",0.951,kg CO2e / kg food in mapped state,3.27,709,broccoli,130,
+leek,reviewed,20039,"Leek, raw",0.611,kg CO2e / kg food in mapped state,2.52,3717,leek,128,
+sweet_potato,reviewed,4102,"Sweet potato, cooked",0.852,kg CO2e / kg food in mapped state,2.98,6266,sweet_potato,104,"Recipe grams must be COOKED weight for this environmental record. Benchmark aliases describe identity, not quantities."
+pea,reviewed,20084,"Garden peas, frozen, raw",0.81,kg CO2e / kg food in mapped state,1.76,4659,pea,169,Frozen raw garden peas record.
+green_bean,reviewed,20061_1,"French bean, raw",0.447,kg CO2e / kg food in mapped state,2.09,2980,green_bean,189,
+bell_pepper,reviewed,20041,"Sweet pepper, green, yellow or red, raw",0.715,kg CO2e / kg food in mapped state,3.11,433,bell_pepper,0,
+jalapeno,reviewed,20151,"Chili pepper, raw",0.715,kg CO2e / kg food in mapped state,3.51,3492,jalapeno,1,Raw chili pepper record.
+canned_tomato,reviewed,20048,"Tomato, peeled, canned, drained",1.51,kg CO2e / kg food in mapped state,2.96,947,canned_tomato,0,"Peeled canned tomato, drained."
+tomato_sauce,reviewed,20260,"Tomato coulis, canned (tomato puree semi-reduced 11%)",0.825,kg CO2e / kg food in mapped state,2.96,6453,tomato_sauce,0,Canned tomato coulis (semi-reduced puree).
+tomato_paste,reviewed,20068,"Tomato paste, concentrated, canned",2.42,kg CO2e / kg food in mapped state,3.06,6450,tomato_paste,0,
+garlic_powder,reviewed,11023,"Garlic, powder, dried",1.77,kg CO2e / kg food in mapped state,2.08,2813,garlic_powder,0,
+onion_powder,reviewed,20180,"Onion, dried",3.56,kg CO2e / kg food in mapped state,3.08,4485,onion_powder,0,Dried onion record.
+cayenne_pepper,reviewed,11088,Cayenne pepper,9.4,kg CO2e / kg food in mapped state,2.96,1036,cayenne_pepper,0,
+chili_powder,reviewed,11088,Cayenne pepper,9.4,kg CO2e / kg food in mapped state,2.96,1225,chili_powder,0,PROXY: cayenne pepper record for the chili powder blend.
+paprika,reviewed,11049,Paprika,9.4,kg CO2e / kg food in mapped state,4.63,4608,paprika,0,
+cinnamon,reviewed,11025,"Cinnamon, powder",9.4,kg CO2e / kg food in mapped state,3.46,1368,cinnamon,183,
+nutmeg,reviewed,11048,Nutmeg,2.23,kg CO2e / kg food in mapped state,2.46,4438,nutmeg,170,
+curry_powder,reviewed,11005,"Curry, powder",9.4,kg CO2e / kg food in mapped state,4.21,1788,curry_powder,0,
+pumpkin_pie_spice,reviewed,11056,Mix of 4 spices,6.4,kg CO2e / kg food in mapped state,2.32,5131,pumpkin_pie_spice,0,PROXY: mix of four spices record.
+italian_seasoning,reviewed,11060,"Provence herbs, dried",2.58,kg CO2e / kg food in mapped state,2.44,3470,italian_seasoning,0,PROXY: dried Provence herbs record.
+vanilla,reviewed,11065,"Vanilla, alcoholic extract",4.38,kg CO2e / kg food in mapped state,2.65,6631,vanilla,174,Alcoholic vanilla extract record.
+parsley,reviewed,11014,"Parsley, fresh",1.12,kg CO2e / kg food in mapped state,3.68,4620,parsley,167,Fresh parsley record.
+cilantro,reviewed,11094,"Coriander, fresh",1.03,kg CO2e / kg food in mapped state,3.2,1363,cilantro,0,Fresh coriander record.
+basil,reviewed,11033,"Basil, fresh",0.879,kg CO2e / kg food in mapped state,3.32,328,basil,210,Fresh basil record.
+oregano,reviewed,11035,"Oregano, dried",2.58,kg CO2e / kg food in mapped state,3.49,4545,oregano,193,Dried oregano record.
+thyme,reviewed,11038,"Thyme, dried",2.58,kg CO2e / kg food in mapped state,3.49,6409,thyme,174,Dried thyme record.
+chive,reviewed,11003,"Chive or spring onion, fresh",0.739,kg CO2e / kg food in mapped state,2.5,1263,chive,126,Chive or spring onion record.
+ketchup,reviewed,11008,Ketchup,1.19,kg CO2e / kg food in mapped state,2.8,3565,ketchup,5,
+soy_sauce,reviewed,11104,"Soy sauce, prepacked",0.995,kg CO2e / kg food in mapped state,1.83,5997,soy_sauce,0,
+chocolate_chip,reviewed,31085,"Dark chocolate bar, more than 40% cocoa, for cooking",15.4,kg CO2e / kg food in mapped state,1.93,1276,chocolate_chip,0,Dark baking chocolate (40%+ cocoa) record.

@@ -1,0 +1,16 @@
+{
+  "checked_on": "2026-11-19",
+  "unit_tests": "24 passed",
+  "pipeline": "build_data, build_recipes, fit_weights, evaluate, export_demo and build_report rerun in README order; fitted weights reproduce exactly and recipes.json is unchanged.",
+  "streamlit_app_checks": [
+    "initial render without exceptions (AppTest with a shim dropping width='stretch', because the installed Streamlit 1.37.1 is older than the required >=1.49; the unmodified original app fails the same way on 1.37.1)",
+    "Data & method tab shows the fitted evidence weights",
+    "default beef scenario gives 81.5% estimated reduction (100% turkey)"
+  ],
+  "earlier_checks_not_repeated": [
+    "baking scenario and exclusion checks in the Streamlit UI (covered by unit tests test_role_gate and test_no_change_and_exclusions)",
+    "offline demo checked in jsdom"
+  ],
+  "browser_visual_check": "Not completed.",
+  "taste_pilot": "Not conducted; empty template correctly reports zero participants and ratings."
+}

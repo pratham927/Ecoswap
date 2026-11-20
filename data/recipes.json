@@ -1,0 +1,966 @@
+[
+  {
+    "id": "demo_01",
+    "name": "Beef and tomato pasta",
+    "target": "beef",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "beef",
+        "grams": 400,
+        "role": "filling"
+      },
+      {
+        "id": "pasta",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "tomato",
+        "grams": 400,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_02",
+    "name": "Beef and kidney bean chilli",
+    "target": "beef",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "beef",
+        "grams": 400,
+        "role": "stew"
+      },
+      {
+        "id": "kidney_beans",
+        "grams": 300,
+        "role": "background"
+      },
+      {
+        "id": "tomato",
+        "grams": 400,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "pepper",
+        "grams": 2,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_03",
+    "name": "Beef and potato pie filling",
+    "target": "beef",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "beef",
+        "grams": 350,
+        "role": "filling"
+      },
+      {
+        "id": "potato",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "carrot",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "butter",
+        "grams": 25,
+        "role": "background"
+      },
+      {
+        "id": "milk",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_04",
+    "name": "Beef rice bowl",
+    "target": "beef",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "beef",
+        "grams": 300,
+        "role": "filling"
+      },
+      {
+        "id": "rice",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "carrot",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "spinach",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_05",
+    "name": "Lamb and lentil stew",
+    "target": "lamb",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "lamb",
+        "grams": 400,
+        "role": "stew"
+      },
+      {
+        "id": "lentils",
+        "grams": 300,
+        "role": "background"
+      },
+      {
+        "id": "tomato",
+        "grams": 300,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_06",
+    "name": "Lamb potato filling",
+    "target": "lamb",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "lamb",
+        "grams": 350,
+        "role": "filling"
+      },
+      {
+        "id": "potato",
+        "grams": 500,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "carrot",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_07",
+    "name": "Chicken tomato stew",
+    "target": "chicken",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 400,
+        "role": "stew"
+      },
+      {
+        "id": "tomato",
+        "grams": 400,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_08",
+    "name": "Chicken chickpea bowl",
+    "target": "chicken",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 300,
+        "role": "filling"
+      },
+      {
+        "id": "chickpeas",
+        "grams": 250,
+        "role": "background"
+      },
+      {
+        "id": "rice",
+        "grams": 500,
+        "role": "background"
+      },
+      {
+        "id": "spinach",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_09",
+    "name": "Pork and bean stew",
+    "target": "pork",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "pork",
+        "grams": 400,
+        "role": "stew"
+      },
+      {
+        "id": "kidney_beans",
+        "grams": 300,
+        "role": "background"
+      },
+      {
+        "id": "tomato",
+        "grams": 300,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_10",
+    "name": "Pork pasta filling",
+    "target": "pork",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "pork",
+        "grams": 350,
+        "role": "filling"
+      },
+      {
+        "id": "pasta",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "tomato",
+        "grams": 400,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_11",
+    "name": "Butter-sauteed spinach",
+    "target": "butter",
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "butter",
+        "grams": 50,
+        "role": "saute"
+      },
+      {
+        "id": "spinach",
+        "grams": 400,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_12",
+    "name": "Butter-sauteed carrots",
+    "target": "butter",
+    "servings": 3,
+    "ingredients": [
+      {
+        "id": "butter",
+        "grams": 50,
+        "role": "saute"
+      },
+      {
+        "id": "carrot",
+        "grams": 500,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_13",
+    "name": "Butter biscuit batter",
+    "target": "butter",
+    "servings": 6,
+    "ingredients": [
+      {
+        "id": "butter",
+        "grams": 100,
+        "role": "baking"
+      },
+      {
+        "id": "flour",
+        "grams": 250,
+        "role": "background"
+      },
+      {
+        "id": "sugar",
+        "grams": 80,
+        "role": "background"
+      },
+      {
+        "id": "egg",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "milk",
+        "grams": 60,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_14",
+    "name": "Butter cake batter",
+    "target": "butter",
+    "servings": 8,
+    "ingredients": [
+      {
+        "id": "butter",
+        "grams": 120,
+        "role": "baking"
+      },
+      {
+        "id": "flour",
+        "grams": 220,
+        "role": "background"
+      },
+      {
+        "id": "sugar",
+        "grams": 120,
+        "role": "background"
+      },
+      {
+        "id": "egg",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "milk",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_15",
+    "name": "Creamy spinach pasta",
+    "target": "cream",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "cream",
+        "grams": 200,
+        "role": "sauce"
+      },
+      {
+        "id": "pasta",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "spinach",
+        "grams": 250,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_16",
+    "name": "Creamy tomato soup",
+    "target": "cream",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "cream",
+        "grams": 200,
+        "role": "sauce"
+      },
+      {
+        "id": "tomato",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_17",
+    "name": "Creamy potato sauce",
+    "target": "cream",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "cream",
+        "grams": 200,
+        "role": "sauce"
+      },
+      {
+        "id": "potato",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "milk",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_18",
+    "name": "Creamy lentil curry base",
+    "target": "cream",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "cream",
+        "grams": 150,
+        "role": "sauce"
+      },
+      {
+        "id": "lentils",
+        "grams": 500,
+        "role": "background"
+      },
+      {
+        "id": "tomato",
+        "grams": 250,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_19",
+    "name": "Milk rice pudding",
+    "target": "milk",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "milk",
+        "grams": 600,
+        "role": "batter"
+      },
+      {
+        "id": "rice",
+        "grams": 300,
+        "role": "background"
+      },
+      {
+        "id": "sugar",
+        "grams": 70,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_20",
+    "name": "Milk pancake batter",
+    "target": "milk",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "milk",
+        "grams": 300,
+        "role": "batter"
+      },
+      {
+        "id": "flour",
+        "grams": 200,
+        "role": "background"
+      },
+      {
+        "id": "egg",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "butter",
+        "grams": 20,
+        "role": "background"
+      },
+      {
+        "id": "sugar",
+        "grams": 20,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_21",
+    "name": "Milk white sauce",
+    "target": "milk",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "milk",
+        "grams": 500,
+        "role": "sauce"
+      },
+      {
+        "id": "flour",
+        "grams": 40,
+        "role": "background"
+      },
+      {
+        "id": "butter",
+        "grams": 40,
+        "role": "background"
+      },
+      {
+        "id": "pepper",
+        "grams": 1,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_22",
+    "name": "Cheddar potato topping",
+    "target": "cheddar",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "cheddar",
+        "grams": 120,
+        "role": "topping"
+      },
+      {
+        "id": "potato",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "milk",
+        "grams": 150,
+        "role": "background"
+      },
+      {
+        "id": "butter",
+        "grams": 20,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_23",
+    "name": "Cheddar pasta bake topping",
+    "target": "cheddar",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "cheddar",
+        "grams": 150,
+        "role": "topping"
+      },
+      {
+        "id": "pasta",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "tomato",
+        "grams": 400,
+        "role": "background"
+      },
+      {
+        "id": "onion",
+        "grams": 100,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 15,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 3,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  },
+  {
+    "id": "demo_24",
+    "name": "Parmesan spinach pasta topping",
+    "target": "parmesan",
+    "servings": 4,
+    "ingredients": [
+      {
+        "id": "parmesan",
+        "grams": 100,
+        "role": "topping"
+      },
+      {
+        "id": "pasta",
+        "grams": 600,
+        "role": "background"
+      },
+      {
+        "id": "spinach",
+        "grams": 200,
+        "role": "background"
+      },
+      {
+        "id": "olive_oil",
+        "grams": 20,
+        "role": "background"
+      },
+      {
+        "id": "garlic",
+        "grams": 10,
+        "role": "background"
+      },
+      {
+        "id": "salt",
+        "grams": 2,
+        "role": "background"
+      }
+    ],
+    "provenance": "Author-defined gram-based demonstration scenario; not a published or taste-tested recipe.",
+    "quantity_basis": "Use masses in the exact food states shown in ingredient_mapping.csv. Cooked grains/legumes are cooked weights; meats are raw weights.",
+    "instructions_note": "Ingredient-list adaptation only. Cooking methods and final texture need a separate kitchen pilot."
+  }
+]
