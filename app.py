@@ -6,28 +6,22 @@ import streamlit as st
 from ecoswap import EcoSwap
 
 ROOT=Path(__file__).resolve().parent
-st.set_page_config(page_title='EcoSwap · Sustainable substitutions',page_icon='🌿',layout='wide')
-st.markdown('''<style>
-.block-container{max-width:1250px;padding-top:2rem} h1{letter-spacing:-.055em;font-size:3.2rem!important}
-div[data-testid="stMetric"]{background:#edf3ec;border-radius:12px;padding:18px}
-.eyebrow{color:#357653;letter-spacing:.14em;font-size:.75rem;font-weight:700}
-div[data-testid="stSidebar"]{background:#edf3ec} .stCaption{line-height:1.6}
-</style>''',unsafe_allow_html=True)
+st.set_page_config(page_title='EcoSwap · The swap studio',page_icon='🍅',layout='wide')
+st.markdown('<style>'+ (ROOT/'styles/app.css').read_text() +'</style>',unsafe_allow_html=True)
 
 @st.cache_resource
 def load():return EcoSwap()
 model=load()
-st.markdown('<div class="eyebrow">COMPUTATIONAL GASTRONOMY / WORKING RESEARCH PROTOTYPE</div>',unsafe_allow_html=True)
-st.title('Small swaps. Measurable change.')
-st.write('Explore lower-carbon ingredient replacements with substitution evidence, cooking-role rules and flavour-compound information.')
-st.caption('Carbon estimates use French AGRIBALYSE 3.2 factors. Evidence scores are not percentages of taste preserved. Demo recipes are authored scenarios, not taste-tested dishes.')
+st.markdown('''<div class="eco-masthead"><div class="eco-wordmark">Eco<span>Swap</span></div><p>Food, thoughtfully adapted.</p></div>
+<div class="eco-intro"><div class="eco-eyebrow">A little thought for every ingredient</div><h1>Good food.<br>A <em>lighter</em> footprint.</h1><p>Rethink an ingredient in a dish you love. Explore a replacement, adjust the amount, and see its estimated carbon impact.</p></div>''',unsafe_allow_html=True)
+st.caption('Research prototype · French AGRIBALYSE 3.2 carbon factors · Adaptations await taste testing.')
 studio,bench,data,pilot=st.tabs(['Swap studio','Evaluation','Data & method','Taste pilot'])
 
 with studio:
     left,right=st.columns([1,2],gap='large')
     with left:
-        st.subheader('01 / Choose a recipe')
-        index=st.selectbox('Demo scenario',range(len(model.recipes)),format_func=lambda i:model.recipes[i]['name'])
+        st.subheader('What’s on the menu?')
+        index=st.selectbox('Choose a recipe',range(len(model.recipes)),format_func=lambda i:model.recipes[i]['name'])
         base=model.recipes[index]
         upload=st.file_uploader('Or import a recipe JSON',type=['json'])
         if upload:
@@ -49,7 +43,8 @@ with studio:
         st.caption('Exclusions apply to replacement suggestions only; they do not remove existing recipe ingredients or certify allergen safety.')
         options=model.options(recipe,source,alpha,cap,excluded)
     with right:
-        st.subheader('02 / Compare the options')
+        st.subheader(recipe['name'])
+        st.caption(f"{recipe['servings']:g} servings · {len(recipe['ingredients'])} ingredients")
         choice=st.selectbox('Recommended option first — explore alternatives',range(len(options)),
             format_func=lambda i:f"{options[i]['target_name']} · {options[i]['fraction']:.0%} replacement · {options[i]['recipe_reduction_pct']:.1f}% estimated recipe reduction")
         best=options[choice]
@@ -69,7 +64,7 @@ with studio:
             sensitivity=model.sensitivity(recipe,source,best)
             st.caption(f"Illustrative ±20% factor stress test: savings {sensitivity['low']:.3f} to {sensitivity['high']:.3f} kg CO₂e. This is not a confidence interval.")
         else:st.info('No change selected. This is an explicit option; the system can abstain when rules or preferences rule out substitutions.')
-        st.subheader('03 / Original and adapted ingredient lists')
+        st.subheader('Your adapted ingredients')
         before_g={x['id']:x['grams'] for x in recipe['ingredients']};after_g={x['id']:x['grams'] for x in modified['ingredients']}
         table=pd.DataFrame([{'Ingredient':model.ingredients[k]['name'],'Original (g)':before_g.get(k,0),'Adapted (g)':after_g.get(k,0),
                             'Mapped food state':model.ingredients[k]['agb_name']} for k in sorted(before_g.keys()|after_g.keys())])
@@ -80,7 +75,7 @@ with studio:
     with a:
         st.subheader('Where the original emissions come from')
         frame=pd.DataFrame(original['contributions']).set_index('name')
-        st.bar_chart(frame[['kg_co2e']],color='#307557')
+        st.bar_chart(frame[['kg_co2e']],color='#ab3527')
     with b:
         st.subheader('Replacement amount vs carbon reduction')
         points=pd.DataFrame([{'Fraction (%)':o['fraction']*100,'Candidate':o['target_name'],'Recipe reduction (%)':o['recipe_reduction_pct']} for o in options if o['fraction']])
