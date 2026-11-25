@@ -112,7 +112,7 @@ with data:
 
 **Candidates:** directed substitution pairs observed in the GISMo training split, within the same manually assigned food family and a shared permitted cooking role, and not on the explicit blocked-pair list. Candidates must reduce estimated emissions after the mass-ratio adjustment.
 
-**Evidence:** weights fitted on the GISMo validation split: {w['support']:g} for training frequency (log-scaled against the most observed swap overall); {w['context']:g} for mean context association when context is present; up to {w['chemistry']:g} for chemical Jaccard similarity, downweighted when either profile is sparse. Available weights are normalized. Missing chemical profiles remain missing.
+**Evidence:** manually chosen base weights: {w['support']:g} for training frequency (log-scaled against the most observed swap overall); {w['context']:g} for mean context association when context is present; up to {w['chemistry']:g} for chemical Jaccard similarity, downweighted when either profile is sparse. Available weights are normalized. Missing chemical profiles remain missing.
 
 **Optimization:** `alpha × whole-recipe carbon reduction − (1 − alpha) × fraction² × (1 − evidence score)`. The penalty is a heuristic preference model, not a prediction of taste change. Search includes no change, 25%, 50%, 75%, and 100%, subject to role and fraction limits.
 
@@ -126,3 +126,4 @@ with pilot:
     for filename in ['taste_pilot_protocol.md','taste_ratings_template.csv']:
         p=ROOT/'results'/filename
         if p.exists():st.download_button('Download '+filename,p.read_bytes(),file_name=filename)
+

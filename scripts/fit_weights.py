@@ -6,7 +6,7 @@ scale matters as well as its ordering. Every weight combination on a 0.05 simple
 therefore scored by the validation MRR of the recorded substitute averaged over carbon
 priorities 0, 0.25, 0.5 and 0.75 (at 1 the evidence has no effect). Ties go to the
 combination closest to the hand-picked weights. The result is written to
-data/evidence_weights.json, which the engine loads automatically.
+data/evidence_weights.json, which stores the fitted comparison. The app uses the manually chosen 60/20/20 defaults.
 
     python scripts/fit_weights.py
 """
@@ -60,3 +60,4 @@ def main():
     print(json.dumps({k:out[k] for k in ['weights','validation','evidence_only_optimum']},indent=2))
 
 if __name__=='__main__':main()
+

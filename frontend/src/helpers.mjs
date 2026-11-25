@@ -1,8 +1,9 @@
 export const routes = { '/': 'Home', '/studio': 'Swap Studio', '/how-it-works': 'How It Works', '/research': 'Research' };
 export function routeFromPath(path) { return path.length > 1 ? path.replace(/\/+$/, '') : '/'; }
-export function makeDraft(recipe) {
+export function makeDraft(recipe, catalogue = null) {
   const copy = structuredClone(recipe);
-  return { recipe: copy, source: copy.ingredients.some(row => row.id === copy.target) ? copy.target : copy.ingredients[0].id, alpha: .5, max_fraction: 1, exclude: [] };
+  const matched = copy.ingredients.filter(row => !catalogue || Object.hasOwn(catalogue, row.id));
+  return { recipe: copy, source: matched.some(row => row.id === copy.target) ? copy.target : matched[0]?.id || '', alpha: .5, max_fraction: 1, exclude: [] };
 }
 export function changeSource(draft, source) { return { ...draft, source }; }
 export function changeIngredient(draft, key, value) {
@@ -22,11 +23,34 @@ export function validateUpload(recipe, catalogue) {
   if (!Number.isFinite(recipe.servings) || recipe.servings < 1 || recipe.servings > 10000) throw new Error('Servings must be a number between 1 and 10,000.');
   const seen = new Set();
   for (const row of recipe.ingredients) {
-    if (!row || !catalogue[row.id]) throw new Error(`Unknown ingredient ID: ${row?.id || '(missing)'}. Use an ID from the ingredient list.`);
-    if (seen.has(row.id)) throw new Error('Combine duplicate ingredient rows before importing.');
-    seen.add(row.id);
+    if (!row || typeof row.id !== 'string' || !row.id.trim()) throw new Error('Each ingredient needs a non-empty text ID.');
+    if (seen.has(row.id.trim().toLowerCase().replaceAll(' ', '_'))) throw new Error('Combine duplicate ingredient rows before importing.');
+    seen.add(row.id.trim().toLowerCase().replaceAll(' ', '_'));
     if (!Number.isFinite(row.grams) || row.grams <= 0 || row.grams > 100000) throw new Error('Ingredient amounts must be positive numbers, up to 100,000 g.');
-    if (typeof row.role !== 'string' || !row.role) throw new Error('Each ingredient needs a role.');
+    if (typeof row.role !== 'string' || !row.role.trim()) throw new Error('Each ingredient needs a role.');
   }
   return recipe;
+}
+
+export function normalizeUpload(recipe, catalogue, aliases = {}) {
+  // Normalize recognized aliases only; unsupported rows remain unchanged.
+  const copy = structuredClone(recipe);
+  const canonical = value => {
+    if (typeof value !== 'string') return null;
+    const key = value.trim().toLowerCase().replaceAll(' ', '_');
+    const id = Object.hasOwn(aliases, key) ? aliases[key] : key;
+    return Object.hasOwn(catalogue, id) ? id : null;
+  };
+  if (Array.isArray(copy?.ingredients)) copy.ingredients = copy.ingredients.map(row => {
+    const id = canonical(row?.id);
+    return id ? { ...row, id } : row;
+  });
+  // An aliased `target` should still preselect the matching ingredient.
+  if (copy && typeof copy === 'object' && canonical(copy.target)) copy.target = canonical(copy.target);
+  return validateUpload(copy, catalogue);
+}
+export function recipeCoverage(recipe, catalogue) {
+  const matched = recipe.ingredients.filter(row => Object.hasOwn(catalogue, row.id));
+  const unsupported = recipe.ingredients.filter(row => !Object.hasOwn(catalogue, row.id));
+  return { matched, unsupported, label: unsupported.length ? `Matched ingredients only (${matched.length} of ${recipe.ingredients.length} original ingredients covered).` : '' };
 }

@@ -32,6 +32,12 @@ def test_all_scenarios_match_engine_and_downloaded_recipe(client):
             assert actual['fraction'] == direct['fraction']
             assert actual['after'] == pytest.approx(direct['after'])
             assert model().footprint(actual['recipe'])['total_kg_co2e'] == pytest.approx(actual['after'])
+            # Built-in presets are fully matched: no partial labels or coverage metadata.
+            assert 'carbon_coverage' not in actual['recipe'] and 'coverage_label' not in actual
+            assert actual['footprint']['coverage'] == 1.0
+        assert data['coverage']['partial'] is False
+        assert data['coverage']['matched_count'] == data['coverage']['original_count'] == len(recipe['ingredients'])
+        assert 'coverage' not in data['original'] or data['original']['coverage'] == 1.0
 
 
 @pytest.mark.parametrize('patch', [{'source': 'mystery'}, {'alpha': 1.1}, {'alpha': True}, {'max_fraction': -.1}, {'exclude': 'milk'}, {'recipe': None}])
@@ -75,3 +81,108 @@ def test_cors_allows_only_configured_frontend(client):
     allowed = client.options('/api/options', headers={'Origin': 'http://localhost:5173', 'Access-Control-Request-Method': 'POST'})
     assert allowed.headers['Access-Control-Allow-Origin'] == 'http://localhost:5173'
     assert 'Access-Control-Allow-Origin' not in client.get('/api/catalogue', headers={'Origin': 'https://unrelated.example'}).headers
+
+
+def mixed_body():
+    matched = [
+        {'id': 'butter', 'grams': 50, 'role': 'saute'},
+        {'id': 'spinach', 'grams': 100, 'role': 'background'},
+        {'id': 'garlic', 'grams': 10, 'role': 'background'},
+        {'id': 'salt', 'grams': 2, 'role': 'background'},
+        {'id': 'onion', 'grams': 50, 'role': 'background'},
+    ]
+    unknown = [{'id': f'unknown spice {i}', 'grams': i + .5, 'role': 'seasoning',
+                'note': {'original': True}} for i in range(5)]
+    return {**body(), 'source': 'butter',
+            'recipe': {'name': 'Mixed', 'servings': 2, 'ingredients': unknown[:2] + matched + unknown[2:]}}
+
+
+def test_partial_upload_swap_and_download(client):
+    payload = mixed_body()
+    before = copy.deepcopy(payload)
+    response = client.post('/api/options', json=payload)
+    assert response.status_code == 200
+    data = response.get_json()
+    label = 'Matched ingredients only (5 of 10 original ingredients covered).'
+    assert data['coverage']['label'] == label
+    assert data['coverage']['matched_count'] == 5
+    assert len(data['coverage']['unsupported']) == 5
+    # Compare every candidate, including full replacement and keep-original.
+    assert any(o['fraction'] > 0 for o in data['options'])
+    expected_original = model().footprint({**payload['recipe'], 'ingredients':
+        [r for r in payload['recipe']['ingredients'] if r['id'] in model().ingredients]})
+    for option in data['options']:
+        assert option['before'] == pytest.approx(expected_original['total_kg_co2e'])
+        assert option['coverage_label'] == label
+        assert option['footprint']['coverage_label'] == label
+        assert option['recipe']['carbon_coverage']['label'] == label
+        exported = option['recipe']['ingredients']
+        unknown = [r for r in exported if r['id'] not in model().ingredients]
+        assert unknown == data['coverage']['unsupported']
+        for row in payload['recipe']['ingredients']:
+            if row['id'] != 'butter' and row['id'] != option['target']:
+                assert row in exported
+        supported = [r for r in exported if r['id'] in model().ingredients]
+        assert option['after'] == pytest.approx(model().footprint(
+            {**payload['recipe'], 'ingredients': supported})['total_kg_co2e'])
+        assert option['recipe_reduction_pct'] == pytest.approx(
+            100 * (option['before'] - option['after']) / option['before'])
+    assert payload == before
+
+
+def test_fully_matched_upload_is_unchanged_by_partial_support(client):
+    payload = mixed_body()
+    payload['recipe']['ingredients'] = [r for r in payload['recipe']['ingredients'] if r['id'] in model().ingredients]
+    data = client.post('/api/options', json=payload).get_json()
+    assert data['coverage']['partial'] is False and data['coverage']['matched_count'] == 5
+    assert data['message'] is None
+    direct = model().options(payload['recipe'], 'butter')
+    assert [(o['target'], o['fraction']) for o in data['options']] == [(o['target'], o['fraction']) for o in direct]
+    for option in data['options']:
+        assert 'carbon_coverage' not in option['recipe']
+        assert model().footprint(option['recipe'])['total_kg_co2e'] == pytest.approx(option['after'])
+
+
+def test_zero_matches_has_no_estimate_or_analysis(client):
+    payload = mixed_body()
+    payload['recipe']['ingredients'] = [{'id': 'unknown', 'grams': 50, 'role': 'background'}]
+    data = client.post('/api/options', json=payload).get_json()
+    assert data['original'] is None and data['options'] == []
+    assert data['coverage']['matched_count'] == 0
+    assert data['recipe']['ingredients'] == payload['recipe']['ingredients']
+    assert 'No ingredients matched' in data['message']
+
+
+@pytest.mark.parametrize('grams', [None, True, -1, 0, float('inf'), float('nan'), 100001])
+def test_unsupported_quantities_still_validated(client, grams):
+    payload = mixed_body()
+    payload['recipe']['ingredients'][0]['grams'] = grams
+    assert client.post('/api/options', json=payload).status_code == 422
+
+
+@pytest.mark.parametrize('row', [None, [], {}, {'id': '', 'grams': 3, 'role': 'x'},
+                                {'id': {}, 'grams': 3, 'role': 'x'},
+                                {'id': 'mystery', 'grams': 3, 'role': None}])
+def test_unsupported_malformed_rows_rejected(client, row):
+    payload = mixed_body()
+    payload['recipe']['ingredients'][0] = row
+    assert client.post('/api/options', json=payload).status_code == 422
+
+
+def test_alias_matches_and_duplicate_aliases_rejected(client):
+    payload = mixed_body()
+    payload['recipe']['ingredients'][2]['id'] = 'unsalted butter'
+    data = client.post('/api/options', json=payload).get_json()
+    assert data['coverage']['matched_count'] == 5
+    payload['recipe']['ingredients'].append({'id': 'butter', 'grams': 1, 'role': 'saute'})
+    assert client.post('/api/options', json=payload).status_code == 422
+
+
+def test_supported_without_alternatives_and_unsupported_source(client):
+    payload = mixed_body()
+    payload['exclude'] = list(model().ingredients)
+    data = client.post('/api/options', json=payload).get_json()
+    assert 'No suitable alternative' in data['message']
+    assert len(data['options']) == 1 and data['options'][0]['fraction'] == 0
+    payload['source'] = 'unknown spice 0'
+    assert client.post('/api/options', json=payload).status_code == 422

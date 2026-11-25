@@ -22,7 +22,7 @@ def csv_write(path, rows):
 def compare_weights(clean, resamples=2000, seed=0):
     """Test-set comparison of hand-picked and fitted evidence weights; the fit itself only saw validation."""
     rows=[];reciprocal={}
-    for name,model in [('hand_picked',EcoSwap(evidence_weights=HAND_PICKED_WEIGHTS)),('fitted',EcoSwap())]:
+    for name,model in [('hand_picked',EcoSwap(evidence_weights=HAND_PICKED_WEIGHTS)),('fitted',EcoSwap(evidence_weights=json.loads((ROOT/'data/evidence_weights.json').read_text())['weights']))]:
         for ranking,alpha in [('evidence_only',0.0),('combined',.5)]:
             hits=[];rr=[]
             for r in clean:
@@ -50,7 +50,12 @@ def main():
     OUT.mkdir(exist_ok=True)
     model=EcoSwap();test=json.loads((ROOT/'data/test.json').read_text())
     from build_data import load_pickle,RAW
-    train_ids={r['id'] for r in load_pickle(RAW/'train_subs.pkl')}
+    processed_only='--processed-only' in sys.argv
+    previous_audit=json.loads((OUT/'summary.json').read_text())['audit'] if processed_only else None
+    if processed_only:
+        assert previous_audit['excluded_train_recipe_id_overlap']==0
+        assert len(test)==previous_audit['evaluated_test_records']
+    train_ids=set() if processed_only else {r['id'] for r in load_pickle(RAW/'train_subs.pkl')}
     leaked=[r for r in test if r['recipe_id'] in train_ids]
     clean=[r for r in test if r['recipe_id'] not in train_ids]
     prediction_rows=[];metrics=[]
@@ -78,7 +83,7 @@ def main():
     csv_write(OUT/'benchmark_metrics.csv',metrics);csv_write(OUT/'benchmark_predictions.csv',prediction_rows)
     weight_rows,weight_differences=compare_weights(clean);csv_write(OUT/'weight_comparison.csv',weight_rows)
     fitted_path=ROOT/'data/evidence_weights.json'
-    weights={'in_use':model.evidence_weights,'hand_picked':HAND_PICKED_WEIGHTS,'test':weight_rows,'test_mrr_difference':weight_differences,
+    weights={'selection':'Manually chosen base weights; fitted weights retained as a benchmark comparison.','in_use':model.evidence_weights,'hand_picked':HAND_PICKED_WEIGHTS,'test':weight_rows,'test_mrr_difference':weight_differences,
              'validation':json.loads(fitted_path.read_text())['validation'] if fitted_path.exists() else None}
     # Same 24 scenarios and exactly the same role-permitted option set for all policies.
     scenarios=[];frontiers=[];curves=[]
@@ -115,11 +120,11 @@ def main():
                           'positive_savings_under_20pct_stress':sum(r['factor_stress_low_saved']>0 for r in rows),
                           'chemical_evidence_available':sum(r['chemical_similarity'] is not None for r in rows)})
     csv_write(OUT/'scenario_summary.csv',aggregate)
-    raw_recipes=list(csv.DictReader((RAW/'recipe_information.csv').open()))
-    audit={'original_gismo_test_records':len(load_pickle(RAW/'test_subs.pkl')),'mapped_test_records':len(test),
+    raw_recipes=[] if processed_only else list(csv.DictReader((RAW/'recipe_information.csv').open()))
+    audit={'original_gismo_test_records':(previous_audit['original_gismo_test_records'] if processed_only else len(load_pickle(RAW/'test_subs.pkl'))),'mapped_test_records':len(test),
            'excluded_train_recipe_id_overlap':len(leaked),'evaluated_test_records':len(clean),
            'unique_test_recipes':len({r['recipe_id'] for r in clean}),
-           'recipe_emissions_records_inspected':len(raw_recipes),
+           'recipe_emissions_records_inspected':previous_audit['recipe_emissions_records_inspected'] if processed_only else len(raw_recipes),
            'recipe_emissions_used_for_quantities':False,
            'reason':'Example recipe 79222: 14-ounce can is recorded as 28.35 g; dash cayenne as 142 g. Automatic quantity conversions not accepted.',
            'curated_scenarios':len(model.recipes),'taste_pilot_completed':False,
@@ -155,3 +160,4 @@ def make_plots(scenarios,frontiers):
     fig.tight_layout();fig.savefig(OUT/'replacement_curve.png',dpi=160);plt.close(fig)
 
 if __name__=='__main__':main()
+

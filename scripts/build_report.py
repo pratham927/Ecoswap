@@ -39,13 +39,13 @@ def main():
     lines += ['',
     '**Finding:** combined ranking improves observed-substitute recovery over carbon-only and chemical-overlap-only ranking, but the simpler frequency baseline is slightly better. We do not claim a state-of-the-art model or superiority to every baseline. Conditional scores on the feasible targets are easier and should not replace the all-mapped scores.',
     '', 'Top-1 asks whether the first suggestion equals the recorded substitute; top-5 asks whether it occurs among the first five. MRR averages the reciprocal rank, with zero for an unreachable target. A different suggested substitute can still be reasonable; exact-match recovery is not a taste or plausibility measurement. Multiple records can share a recipe, so these rows are not independent sensory observations.',
-    '', '## Experiment 1b: fitted evidence weights','',
-    f"`scripts/fit_weights.py` searches every weight combination on a 0.05 grid using only the {weights['validation']['records']:,} mapped validation records. It keeps the one with the highest validation MRR averaged over carbon priorities 0, 0.25, 0.5 and 0.75, because the evidence score is always mixed with carbon in the app. Fitted weights: **{fmt_w(w)}** (hand-picked: {fmt_w(weights['hand_picked'])}). Ranking on evidence alone would favour more context ({fmt_w(json.loads((ROOT/'data/evidence_weights.json').read_text())['evidence_only_optimum']['weights'])}), but those weights shrink the score so the carbon term dominates at the default setting.",
+    '', f"The active app uses manually chosen base weights: **{fmt_w(w)}**. These include compound evidence when available; sparse profiles reduce its effective weight.",'', '## Experiment 1b: fitted evidence weights (comparison)','',
+    f"`scripts/fit_weights.py` searches every weight combination on a 0.05 grid using only the {weights['validation']['records']:,} mapped validation records. It keeps the one with the highest validation MRR averaged over carbon priorities 0, 0.25, 0.5 and 0.75, because the evidence score is always mixed with carbon in the app. Fitted comparison weights: **{fmt_w(json.loads((ROOT/'data/evidence_weights.json').read_text())['weights'])}** (hand-picked: {fmt_w(weights['hand_picked'])}). Ranking on evidence alone would favour more context ({fmt_w(json.loads((ROOT/'data/evidence_weights.json').read_text())['evidence_only_optimum']['weights'])}), but those weights shrink the score so the carbon term dominates at the default setting.",
     '', '| Weights | Ranking | Top-1 | MRR |','|---|---|---:|---:|']
     for r in weights['test']:
         lines.append(f"| {r['weights'].replace('_',' ').capitalize()} | {'Evidence only (α = 0)' if r['ranking']=='evidence_only' else 'Combined (α = 0.5)'} | {r['hit1_all_mapped']:.1%} | {r['mrr_all_mapped']:.4f} |")
     lines += ['']+[f"- {'Evidence only' if k=='evidence_only' else 'Combined'}: fitted minus hand-picked MRR {v['mrr_difference']:+.4f} (95% paired bootstrap interval over recipes {v['ci95_low']:+.4f} to {v['ci95_high']:+.4f})." for k,v in weights['test_mrr_difference'].items()]
-    lines += ['', '**Finding:** flavour-compound overlap adds nothing measurable to predicting which substitute people choose, and context adds little. The gain from fitting is small but its interval excludes zero for the combined ranking the app uses.',
+    lines += ['', '**Finding:** this validation search selected zero compound weight for recorded-substitute recovery. The app deliberately uses the manually chosen 60/20/20 weights to include chemical evidence. The fitted comparison improves MRR slightly; these results do not measure sensory preservation.',
     '', '## Experiment 2: carbon estimates on 24 scenarios','',
     '| Policy | Mean recipe reduction | Median recipe reduction | Positive savings under illustrative ±20% factor stress |',
     '|---|---:|---:|---:|']
@@ -68,7 +68,7 @@ def main():
     '', '`E(recipe) = Σ grams_i / 1000 × factor_i`',
     '', '`saving(a→b, f) = grams_a / 1000 × f × (factor_a − mass_ratio × factor_b)`',
     '', 'The support term is `log(1 + pair_count) / log(1 + largest_allowed_pair_count_overall)`, so a rarely observed swap scores low even when it is the only option for its source. Context association averages how often the current recipe context ingredients appear in training examples for that pair. Chemical similarity is the Jaccard overlap between compound sets. Chemical weight is reduced by `min(profile_sizes)/(min(profile_sizes)+20)`. Missing chemical terms are omitted and remaining weights normalized; this is a heuristic availability treatment, not statistical imputation.',
-    '', f"The evidence score combines support, context (if context exists) and chemistry with weights fitted on the validation split ({fmt_w(w)}). It is not calibrated to taste, probability of acceptability, or amount of flavour preserved.",
+    '', f"The evidence score combines support, context (if context exists) and chemistry with manually chosen base weights ({fmt_w(w)}). It is not calibrated to taste, probability of acceptability, or amount of flavour preserved.",
     '', '`objective = α × whole_recipe_reduction − (1−α) × f² × (1−evidence)`',
     '', 'The square on replacement fraction is a chosen increasing change penalty. It allows partial options to trade off with emissions. It is not a mechanistic model of sensory mixtures. The script records sensitivity to α = 0, 0.25, 0.5, 0.75 and 1; no test-set tuning was done.',
     '', '## Boundaries that matter','',
@@ -87,3 +87,4 @@ def main():
     print('Generated results/REPORT.md')
 
 if __name__=='__main__':main()
+

@@ -5,7 +5,7 @@ import math
 from pathlib import Path
 
 DATA = Path(__file__).resolve().parents[1] / 'data'
-# Original declared weights. data/evidence_weights.json (scripts/fit_weights.py) replaces them when present.
+# Manually chosen default weights. Validation-fitted weights remain available for comparison.
 HAND_PICKED_WEIGHTS = {'support':.6,'context':.2,'chemistry':.2}
 
 def evidence_score(row, weights):
@@ -34,9 +34,8 @@ class EcoSwap:
         # Support is scaled against the best-supported permitted swap overall, so a source's
         # only swap seen twice does not get the same evidence as one seen hundreds of times.
         self.max_train_count=max([p['train_count'] for p in self.pairs if p['roles']],default=1)
-        fitted=self.data_dir/'evidence_weights.json'
         if evidence_weights is None:
-            evidence_weights=json.loads(fitted.read_text(encoding='utf-8'))['weights'] if fitted.exists() else HAND_PICKED_WEIGHTS
+            evidence_weights=HAND_PICKED_WEIGHTS
         self.evidence_weights={k:number(evidence_weights[k],f'{k} weight',0,1) for k in HAND_PICKED_WEIGHTS}
 
     def canonical(self, ingredient):
@@ -166,3 +165,4 @@ class EcoSwap:
         ea=self.ingredients[a]['factor'];eb=self.ingredients[option['target']]['factor']*option['mass_ratio']
         k=grams/1000*option['fraction']
         return {'low':k*(ea*(1-band)-eb*(1+band)),'high':k*(ea*(1+band)-eb*(1-band)),'band':band}
+
