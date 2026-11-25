@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: ecoswap-api
+    runtime: python
+    plan: free
+    branch: redesign/react-experience
+    buildCommand: pip install -r requirements-api.txt
+    startCommand: gunicorn api.app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: ALLOWED_ORIGINS
+        sync: false

@@ -1,0 +1,10 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+node_modules/
+frontend/dist/
+frontend/public/photos/
+.env
+.env.local
+.DS_Store

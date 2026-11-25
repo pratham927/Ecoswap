@@ -1,5 +1,9 @@
 # EcoSwap
 
+## React website
+
+The redesigned website is in `frontend/`, with a photographic homepage, separate Swap Studio, How It Works and Research pages, and a Python API in `api/`. See [DEPLOY_REACT.md](DEPLOY_REACT.md) for local development and free Render + Cloudflare Pages deployment. The original Streamlit app below remains available.
+
 A working computational gastronomy mini-project for **lower-carbon ingredient replacement with substitution evidence and flavour-compound support**.
 
 ## Start here
@@ -136,3 +140,4 @@ The catalogue holds 135 reviewed ingredients: the original 40, plus 95 added and
 ## Important boundaries
 
 These totals are ingredient-sum screening estimates, not a validated recipe lifecycle assessment. Raw/cooked food states, composition and generic proxies are visible in the mapping table. Do not add another kitchen-energy estimate without revisiting dataset boundaries. A ±20% sensitivity band is an illustrative factor stress test, not a statistical confidence interval; DQR is not converted to a standard error. Taste, texture and liking require a physical pilot. No pilot responses are included or fabricated.
+
