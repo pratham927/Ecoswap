@@ -76,9 +76,10 @@ def test_deterministic_ranking(model):
 def test_no_test_only_pair(model):
     assert all(p['train_count']>0 for p in model.pairs)
 
-def test_fitted_weights_loaded_and_overridable(model):
-    assert model.evidence_weights==json.loads((ROOT/'data/evidence_weights.json').read_text())['weights']
-    assert EcoSwap(evidence_weights=HAND_PICKED_WEIGHTS).evidence_weights==HAND_PICKED_WEIGHTS
+def test_manual_weights_used_and_overridable(model):
+    assert model.evidence_weights==HAND_PICKED_WEIGHTS
+    fitted=json.loads((ROOT/'data/evidence_weights.json').read_text())['weights']
+    assert EcoSwap(evidence_weights=fitted).evidence_weights==fitted
 
 def test_missing_evidence_terms_drop_out():
     row={'support_score':.5,'context_score':None,'chemical_similarity':None,'chemical_weight_reliability':0}
@@ -104,3 +105,10 @@ def test_dried_to_fresh_mass_ratio(model):
 def test_weight_fitting_never_reads_test_split():
     source=(ROOT/'scripts/fit_weights.py').read_text()
     assert 'test.json' not in source and 'test_subs' not in source
+
+
+
+def test_compound_overlap_influences_default_score(model):
+    low={'support_score':.5,'context_score':.3,'chemical_similarity':.1,'chemical_weight_reliability':.5}
+    high={**low,'chemical_similarity':.9}
+    assert evidence_score(high,model.evidence_weights)>evidence_score(low,model.evidence_weights)

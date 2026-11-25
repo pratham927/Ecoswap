@@ -31,7 +31,7 @@ Run commands inside the extracted `ecoswap` folder. No GPU, paid API, API key, m
 | Deliverable | Implemented output | Status |
 |---|---|---|
 | Recipe carbon estimator | Grams × mapped emission factors, ingredient contributions, totals and per-serving estimates; invalid/unknown inputs rejected | Implemented |
-| Substitute ranking | Directed GISMo training support, manually specified role restrictions, context association, chemical overlap with missing/sparse flags; evidence weights fitted on the validation split | Implemented |
+| Substitute ranking | Directed GISMo training support, manually specified role restrictions, context association, chemical overlap with missing/sparse flags; manually chosen base evidence weights of 60/20/20 | Implemented |
 | Partial-replacement optimization | Discrete no-change/25/50/75/100% search, carbon preference slider, fraction limits, Pareto frontier, before/after lists | Implemented |
 | Comparative evaluation and taste pilot | Held-out ranking, baseline comparison, 24-scenario emissions analysis, factor/weight sensitivity, taste protocol and rating analysis | Computational evaluation complete; physical taste pilot pending |
 
@@ -53,18 +53,18 @@ python -m pytest -q
 
 ## Actual results
 
-On **3,663 mapped held-out examples** from the 10,747-record GISMo test split, combined top-1 recovery is **19.3%**, compared with carbon-only **10.6%**, compound-overlap-only **13.4%**, and frequency-only **22.1%**. The simple frequency baseline is better. Only 1,340 of the 3,663 targets are present in the constrained candidate sets, mostly because about half of the recorded substitutes have a higher carbon factor and are never suggested by design. All-mapped metrics count the others as misses; the report also shows the easier feasible-target metrics. No recipe ID overlaps the training split in these examples.
+On **3,663 mapped held-out examples** from the 10,747-record GISMo test split, combined top-1 recovery is **18.8%**, compared with carbon-only **10.6%**, compound-overlap-only **13.4%**, and frequency-only **22.1%**. The simple frequency baseline is better. Only 1,340 of the 3,663 targets are present in the constrained candidate sets, mostly because about half of the recorded substitutes have a higher carbon factor and are never suggested by design. All-mapped metrics count the others as misses; the report also shows the easier feasible-target metrics. No recipe ID overlaps the training split in these examples.
 
-Fitted evidence weights (**support 0.95, context 0.05, chemistry 0**) beat the hand-picked 0.6 / 0.2 / 0.2 on the combined ranking the app uses: test MRR 0.2557 vs 0.2516, a difference of +0.0040 (95% paired bootstrap interval +0.0020 to +0.0062). Ranking on evidence alone they are level. Flavour-compound overlap adds nothing measurable to predicting which substitute people choose.
+The app uses manually chosen base weights (**support 0.6, context 0.2, chemistry 0.2**) so compound evidence influences recommendations when available. Sparse chemical profiles reduce its effective weight. The validation-fitted 0.95 / 0.05 / 0 weights remain a comparison: test MRR 0.2557 versus 0.2516 for the active defaults. These are substitution-recovery metrics, not measurements of flavour preservation.
 
-On **24 author-defined scenarios**, mean estimated recipe-level reductions are combined **38.4%**, carbon-only **53.2%**, compound-overlap-only **39.5%**, and frequency-only **43.3%**. These are illustrative computations on selected scenarios, not unbiased population results or measured real-world savings. Combined optimization chooses the replacement fraction; the other policies use the chosen candidate's maximum permitted fraction. See `results/REPORT.md` for the complete interpretation.
+On **24 author-defined scenarios**, mean estimated recipe-level reductions are combined **35.5%**, carbon-only **53.2%**, compound-overlap-only **39.5%**, and frequency-only **43.3%**. These are illustrative computations on selected scenarios, not unbiased population results or measured real-world savings. Combined optimization chooses the replacement fraction; the other policies use the chosen candidate's maximum permitted fraction. See `results/REPORT.md` for the complete interpretation.
 
 ## Model
 
 1. Normalize only aliases explicitly listed in `data/catalogue.csv`. No fuzzy mapping or unknown-ingredient zero-fill.
 2. Calculate `E = sum(grams_i / 1000 * factor_i)` using each mapped food state.
 3. Retrieve directed pairs seen in GISMo training. Filter by same food family, shared role, the explicit list in `data/blocked_pairs.csv`, exclusions, and `replacement_mass_ratio * target_factor < source_factor`.
-4. Build an evidence score from pair count `log(1+count)/log(1+largest permitted count overall)`, context association (when context exists) and Jaccard overlap (downweighted by `min(profile_sizes)/(min(profile_sizes)+20)`). Normalize available weights. A missing chemical profile stays missing; it is not assigned zero overlap. The weights come from `data/evidence_weights.json`, written by `scripts/fit_weights.py`: it tries every combination on a 0.05 grid and keeps the best validation MRR averaged over carbon priorities 0, 0.25, 0.5 and 0.75. The test split is not read. The original hand-picked weights stay available as `HAND_PICKED_WEIGHTS`.
+4. Build an evidence score from pair count `log(1+count)/log(1+largest permitted count overall)`, context association (when context exists) and Jaccard overlap (downweighted by `min(profile_sizes)/(min(profile_sizes)+20)`). Normalize available weights. A missing chemical profile stays missing; it is not assigned zero overlap. The app defaults to manually chosen 60/20/20 base weights in `HAND_PICKED_WEIGHTS`. The validation-only search in `scripts/fit_weights.py` writes a comparison to `data/evidence_weights.json`; running that script does not change the app defaults.
 5. Ranking score for combined candidates is `alpha * ingredient_reduction_fraction + (1-alpha) * evidence`. Carbon-only ranks by carbon reduction; flavour-only ranks by available Jaccard overlap, with missing profiles last and training frequency as a tie-break; frequency ranks by observed training count.
 6. Optimize recipe-level options using `alpha * whole_recipe_reduction - (1-alpha) * fraction**2 * (1-evidence)`. The convex penalty is a declared modelling choice, not a trained sensory prediction. Keep-original has zero benefit and zero penalty.
 
@@ -143,3 +143,6 @@ The catalogue holds 135 reviewed ingredients: the original 40, plus 95 added and
 
 These totals are ingredient-sum screening estimates, not a validated recipe lifecycle assessment. Raw/cooked food states, composition and generic proxies are visible in the mapping table. Do not add another kitchen-energy estimate without revisiting dataset boundaries. A ±20% sensitivity band is an illustrative factor stress test, not a statistical confidence interval; DQR is not converted to a standard error. Taste, texture and liking require a physical pilot. No pilot responses are included or fabricated.
 
+
+
+To refresh metrics from the unchanged processed test snapshot and its existing zero-overlap audit, use `python scripts/evaluate.py --processed-only`. Use the standard evaluation command when rebuilding data or changing train/test splits.

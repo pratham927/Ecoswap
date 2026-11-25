@@ -41,12 +41,12 @@
       "mapped_test_records": 3663,
       "candidate_target_coverage": 0.3658203658203658,
       "abstentions": 927,
-      "hit1_all_mapped": 0.19301119301119302,
-      "hit5_all_mapped": 0.33715533715533713,
-      "mrr_all_mapped": 0.25567417385599206,
+      "hit1_all_mapped": 0.1880971880971881,
+      "hit5_all_mapped": 0.33742833742833744,
+      "mrr_all_mapped": 0.2516495077101138,
       "feasible_target_records": 1340,
-      "hit1_feasible": 0.5276119402985074,
-      "mrr_feasible": 0.6989063424138051
+      "hit1_feasible": 0.514179104477612,
+      "mrr_feasible": 0.687904587121005
     }
   ],
   "scenarios": [
@@ -80,11 +80,11 @@
     {
       "method": "combined",
       "scenarios": 24,
-      "mean_recipe_reduction_pct": 38.411580643386394,
-      "median_recipe_reduction_pct": 37.58538876675931,
-      "total_scenario_kg_co2e_saved": 64.287715,
+      "mean_recipe_reduction_pct": 35.526611679181414,
+      "median_recipe_reduction_pct": 36.00786715995103,
+      "total_scenario_kg_co2e_saved": 63.088890000000006,
       "positive_savings_under_20pct_stress": 19,
-      "chemical_evidence_available": 16
+      "chemical_evidence_available": 13
     }
   ],
   "audit": {
@@ -103,10 +103,11 @@
     "scenario_scope": "Author-defined scenarios, not an unbiased sample of real-world recipes."
   },
   "evidence_weights": {
+    "selection": "Manually chosen base weights; fitted weights retained as a benchmark comparison.",
     "in_use": {
-      "support": 0.95,
-      "context": 0.05,
-      "chemistry": 0.0
+      "support": 0.6,
+      "context": 0.2,
+      "chemistry": 0.2
     },
     "hand_picked": {
       "support": 0.6,
