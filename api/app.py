@@ -1,4 +1,5 @@
 """Read-only HTTP interface to the existing EcoSwap engine."""
+import copy
 import csv
 import json
 import os
@@ -51,10 +52,71 @@ def health():
 @app.get('/api/catalogue')
 def catalogue():
     m = model()
-    return jsonify(recipes=m.recipes, ingredients={key: {
+    return jsonify(recipes=m.recipes, aliases=m.aliases, ingredients={key: {
         'name': value['name'], 'roles': value['roles'], 'food_state': value['agb_name'],
         'factor': value['factor'],
     } for key, value in m.ingredients.items()})
+
+
+def match_recipe(raw, m):
+    """Validate every row, but pass only recognized rows to the strict engine."""
+    if not isinstance(raw, dict):
+        raise ValueError('Recipe must be a JSON object')
+    recipe = copy.deepcopy(raw)
+    rows = recipe.get('ingredients')
+    if not isinstance(rows, list) or not 1 <= len(rows) <= 100:
+        raise ValueError('Use between 1 and 100 ingredients per recipe.')
+    recipe.setdefault('name', 'Custom recipe')
+    recipe.setdefault('id', 'custom')
+    if not isinstance(recipe['name'], str) or not recipe['name'].strip() or len(recipe['name']) > 160:
+        raise ValueError('Recipe name must be text of at most 160 characters.')
+    recipe['servings'] = number(recipe.get('servings', 1), 'servings', 1, 10000)
+    matched, unsupported, seen = [], [], set()
+    for row in rows:
+        if not isinstance(row, dict) or not isinstance(row.get('id'), str) or not row['id'].strip():
+            raise ValueError('Each ingredient needs a non-empty text ID.')
+        grams = number(row.get('grams'), 'grams', 0, 100000)
+        if grams == 0:
+            raise ValueError('Ingredient grams must be positive')
+        if not isinstance(row.get('role'), str) or not row['role'].strip():
+            raise ValueError('Each ingredient needs an explicit role')
+        key = row['id'].strip().lower().replace(' ', '_')
+        canonical = m.aliases.get(key)
+        identity = canonical or key
+        if identity in seen:
+            raise ValueError('Combine duplicate ingredient rows before importing.')
+        seen.add(identity)
+        if canonical:
+            row['id'] = canonical
+            row['grams'] = grams
+            matched.append(row)
+        else:
+            unsupported.append(row)  # Preserve the entire unsupported row verbatim.
+    count, total = len(matched), len(rows)
+    coverage = {
+        'matched_count': count, 'original_count': total,
+        'matched_ids': [r['id'] for r in matched],
+        'unsupported': unsupported, 'partial': count < total,
+        'label': (f'Matched ingredients only ({count} of {total} original ingredients covered).'
+                  if count < total else 'All original ingredients covered.'),
+    }
+    return recipe, {**recipe, 'ingredients': matched}, coverage
+
+
+def restore_unsupported(full, adapted, m, coverage):
+    # Keep original row order; append any newly introduced supported ingredient.
+    remaining = {r['id']: r for r in adapted['ingredients']}
+    restored = []
+    for row in full['ingredients']:
+        if row['id'] not in m.ingredients:
+            restored.append(copy.deepcopy(row))
+        elif row['id'] in remaining:
+            restored.append(remaining.pop(row['id']))
+    restored.extend(remaining.values())
+    result = {**adapted, 'ingredients': restored}
+    if coverage['partial']:
+        result['carbon_coverage'] = coverage
+    return result
 
 
 @app.post('/api/options')
@@ -64,14 +126,10 @@ def options():
         if not isinstance(payload, dict):
             raise ValueError('Send a JSON object containing a recipe and source ingredient.')
         m = model()
-        recipe = m.validate_recipe(payload.get('recipe'))
-        if len(recipe['ingredients']) > 100:
-            raise ValueError('Use at most 100 ingredients per recipe.')
-        if not isinstance(recipe['name'], str) or len(recipe['name']) > 160:
-            raise ValueError('Recipe name must be text of at most 160 characters.')
-        for row in recipe['ingredients']:
-            number(row['grams'], 'grams', 0, 100000)
-        number(recipe['servings'], 'servings', 1, 10000)
+        full, recipe, coverage = match_recipe(payload.get('recipe'), m)
+        if not recipe['ingredients']:
+            return jsonify(recipe=full, original=None, options=[], coverage=coverage,
+                           message='No ingredients matched. Swap analysis is unavailable.')
         source = m.canonical(payload.get('source', ''))
         exclusions = payload.get('exclude', [])
         if not isinstance(exclusions, list) or len(exclusions) > len(m.ingredients):
@@ -84,9 +142,19 @@ def options():
                   'chemical_coverage', 'train_count', 'note', 'mass_ratio', 'objective', 'pareto', 'change_penalty']
         for option in ranked:
             adapted = recipe if option['fraction'] == 0 else m.apply(recipe, source, option['target'], option['fraction'])
-            output.append({**{key: option[key] for key in fields}, 'recipe': adapted,
+            output.append({**{key: option[key] for key in fields}, 'recipe': restore_unsupported(full, adapted, m, coverage),
                            'footprint': m.footprint(adapted), 'sensitivity': m.sensitivity(recipe, source, option)})
-        return jsonify(recipe=recipe, original=original, options=output)
+        # Keep coverage tied to the original upload even when a swap adds/removes rows.
+        if coverage['partial']:
+            original['coverage'] = coverage['matched_count'] / coverage['original_count']
+            original['coverage_label'] = coverage['label']
+            for option in output:
+                option['coverage_label'] = coverage['label']
+                option['footprint']['coverage'] = original['coverage']
+                option['footprint']['coverage_label'] = coverage['label']
+        return jsonify(recipe=full, original=original, options=output, coverage=coverage,
+                       message=('No suitable alternative found for this ingredient and settings.'
+                                if not any(o['fraction'] > 0 for o in output) else None))
     except (ValueError, TypeError, KeyError) as error:
         return jsonify(error=str(error)), 422
 

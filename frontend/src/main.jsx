@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { api, apiUrl } from './api.js';
-import { routes, routeFromPath, makeDraft, changeSource, changeIngredient, ingredientComparison, validateUpload } from './helpers.mjs';
+import { routes, routeFromPath, normalizeUpload, recipeCoverage, makeDraft, changeSource, changeIngredient, ingredientComparison } from './helpers.mjs';
 import photos from './photos.json';
 import './styles.css';
 
@@ -91,23 +91,26 @@ function Studio({ catalogue, saved, onSave }) {
   useEffect(() => () => abort.current?.abort(), []);
   const source = draft.recipe.ingredients.find(row => row.id === draft.source);
   const sourceInfo = catalogue.ingredients[draft.source];
-  const roles = [...new Set([source.role, ...sourceInfo.roles])];
-  const change = updated => { setDraft(updated); setResult(null); setChoice(0); setError(''); };
+  const coverage = recipeCoverage(draft.recipe, catalogue.ingredients);
+  const roles = sourceInfo ? [...new Set([source.role, ...sourceInfo.roles])] : [];
+  const change = updated => { abort.current?.abort(); setBusy(false); setDraft(updated); setResult(null); setChoice(0); setError(''); };
   async function calculate(event) {
-    event.preventDefault(); abort.current?.abort(); abort.current = new AbortController();
+    event.preventDefault(); if (!coverage.matched.length) return; abort.current?.abort();
+    const controller = new AbortController(); abort.current = controller;
     setBusy(true); setError('');
     try {
-      const data = await api('options', { body: draft, signal: abort.current.signal });
+      const data = await api('options', { body: draft, signal: controller.signal });
+      if (controller.signal.aborted) return;
       setResult(data); setChoice(0); requestAnimationFrame(() => resultsHeading.current?.focus({ preventScroll: true }));
-    } catch (caught) { if (caught.name !== 'AbortError') setError(caught.name === 'TimeoutError' ? 'The recipe service took too long to respond. Please try again.' : caught.message); }
-    finally { setBusy(false); }
+    } catch (caught) { if (!controller.signal.aborted && caught.name !== 'AbortError') setError(caught.name === 'TimeoutError' ? 'The recipe service took too long to respond. Please try again.' : caught.message); }
+    finally { if (abort.current === controller) setBusy(false); }
   }
   async function upload(event) {
     const file = event.target.files[0]; event.target.value = '';
     if (!file) return;
     try {
       if (file.size > 256 * 1024) throw new Error('Choose a JSON file smaller than 256 KB.');
-      change(makeDraft({ ...validateUpload(JSON.parse(await file.text()), catalogue.ingredients), id: 'custom-upload' }));
+      change(makeDraft({ ...normalizeUpload(JSON.parse(await file.text()), catalogue.ingredients, catalogue.aliases), id: 'custom-upload' }, catalogue.ingredients));
     } catch (caught) { setError(caught instanceof SyntaxError ? 'This file is not valid JSON.' : caught.message); }
   }
   const best = result?.options[choice];
@@ -122,28 +125,38 @@ function Studio({ catalogue, saved, onSave }) {
           </select>
           <label className="upload-label" htmlFor="upload">Or upload your own recipe <span>JSON</span><input id="upload" type="file" accept=".json,application/json" onChange={upload} /></label>
           <div className="form-divider" />
-          <label htmlFor="ingredient">Ingredient to replace</label><select id="ingredient" value={draft.source} onChange={e => change(changeSource(draft, e.target.value))}>{draft.recipe.ingredients.map(row => <option key={row.id} value={row.id}>{catalogue.ingredients[row.id].name}</option>)}</select>
-          <div className="form-pair"><div><label htmlFor="grams">Amount (g)</label><input id="grams" type="number" min="1" max="100000" step="any" required value={source.grams} onChange={e => change(changeIngredient(draft, 'grams', e.target.value === '' ? '' : Number(e.target.value)))} /></div><div><label htmlFor="role">Cooking role</label><select id="role" value={source.role} onChange={e => change(changeIngredient(draft, 'role', e.target.value))}>{roles.map(role => <option key={role} value={role}>{role}</option>)}</select></div></div>
-          <p className="field-hint">Food state: {sourceInfo.food_state}. Match your amount to this state.</p>
+          {draft.recipe.id === 'custom-upload' && <div className="match-report" role="status">
+            <strong>{coverage.matched.length} of {draft.recipe.ingredients.length} ingredients matched</strong>
+            <p>Matched: {coverage.matched.map(row => catalogue.ingredients[row.id].name).join(', ') || 'None'}</p>
+            <p>Unsupported: {coverage.unsupported.map(row => `${row.id} (${row.grams} g)`).join(', ') || 'None'}</p>
+            {coverage.unsupported.length > 0 && coverage.matched.length > 0 && <p>{coverage.label} Unsupported ingredients stay unchanged and are excluded from emissions estimates; their emissions are unknown, not zero.</p>}
+          </div>}
+          {!coverage.matched.length && <p role="status">No ingredients matched. Swap analysis is unavailable. Upload a recipe with at least one supported ingredient.</p>}
+          {sourceInfo && <>
+          <label htmlFor="ingredient">Ingredient to replace</label><select id="ingredient" value={draft.source} onChange={e => change(changeSource(draft, e.target.value))}>{coverage.matched.map(row => <option key={row.id} value={row.id}>{catalogue.ingredients[row.id].name}</option>)}</select>
+          <div className="form-pair"><div><label htmlFor="grams">Amount (g)</label><input id="grams" type="number" min="0.001" max="100000" step="any" required value={source.grams} onChange={e => change(changeIngredient(draft, 'grams', e.target.value === '' ? '' : Number(e.target.value)))} /></div><div><label htmlFor="role">Cooking role</label><select id="role" value={source.role} onChange={e => change(changeIngredient(draft, 'role', e.target.value))}>{roles.map(role => <option key={role} value={role}>{role}</option>)}</select></div></div>
+          <p className="field-hint">Food state: {sourceInfo.food_state}. Match your amount to this state.</p></>}
           <label htmlFor="priority" className="range-label">Carbon priority <output>{Math.round(draft.alpha * 100)}%</output></label><input id="priority" type="range" min="0" max="1" step=".05" value={draft.alpha} onChange={e => change({ ...draft, alpha: Number(e.target.value) })} /><div className="range-ends"><span>Less change</span><span>Lower carbon</span></div>
           <label htmlFor="cap">Maximum replacement</label><select id="cap" value={draft.max_fraction} onChange={e => change({ ...draft, max_fraction: Number(e.target.value) })}>{[0, .25, .5, .75, 1].map(value => <option key={value} value={value}>{value * 100}%</option>)}</select>
           <details className="exclusions"><summary>Exclude ingredients <span>{draft.exclude.length ? `(${draft.exclude.length})` : '(optional)'}</span></summary><div className="exclusion-list">{Object.entries(catalogue.ingredients).map(([id, ingredient]) => <label key={id}><input type="checkbox" checked={draft.exclude.includes(id)} onChange={e => change({ ...draft, exclude: e.target.checked ? [...draft.exclude, id] : draft.exclude.filter(x => x !== id) })} />{ingredient.name}</label>)}</div><p className="field-hint">Only suggestions are excluded. Existing ingredients remain; this is not an allergen safety check.</p></details>
-          <button className="button green full" type="submit">{busy ? 'Finding your swaps…' : 'Explore replacements'}</button>
+          <button className="button green full" type="submit" disabled={!coverage.matched.length}>{busy ? 'Finding your swaps…' : 'Explore replacements'}</button>
         </fieldset>
-        <details className="import-help"><summary>Custom recipe format</summary><p>Use canonical IDs from the ingredient list below. Grains and legumes use cooked weights.</p><button type="button" className="text-button" onClick={() => saveJson(catalogue.recipes[0], 'ecoswap-recipe-template.json')}>Download example JSON</button><button type="button" className="text-button" onClick={() => saveJson(catalogue.ingredients, 'ecoswap-ingredient-ids.json')}>Download ingredient IDs</button></details>
+        <details className="import-help"><summary>Custom recipe format</summary><p>Use canonical IDs or recognized aliases for matching. Unsupported ingredients are retained unchanged. Grains and legumes use cooked weights.</p><button type="button" className="text-button" onClick={() => saveJson(catalogue.recipes[0], 'ecoswap-recipe-template.json')}>Download example JSON</button><button type="button" className="text-button" onClick={() => saveJson(catalogue.ingredients, 'ecoswap-ingredient-ids.json')}>Download ingredient IDs</button></details>
       </form>
       <section className="studio-results" aria-label="Replacement results" aria-busy={busy}>
         {error && <ErrorBox message={error} />}
         {busy ? <Loading label="Considering your ingredients" /> : !best ? <div className="empty-result"><div className="empty-art"><img src={photoUrl(photos[0], 900)} alt="Pasta with pesto and sun-dried tomatoes" /><span className="round-seal"><Leaf /><span>Every ingredient<br />has a story.</span></span></div><p className="eyebrow">Start with something you love</p><h2>Your next favourite<br /><em>could start with a swap.</em></h2><p>Select a recipe and choose “Explore replacements” to compare real estimates from the EcoSwap engine.</p><p className="small-note">Research prototype · adaptations await taste testing</p></div> : <>
           <div className="result-heading"><p className="eyebrow">Your recipe, reconsidered</p><h2 tabIndex="-1" ref={resultsHeading}>{result.recipe.name}</h2><p>{result.recipe.servings} servings · {result.recipe.ingredients.length} ingredients</p></div>
-          <label htmlFor="alternative">Recommended option first — explore alternatives</label><select id="alternative" value={choice} onChange={e => setChoice(Number(e.target.value))}>{result.options.map((option, index) => <option key={`${option.target}-${option.fraction}`} value={index}>{option.target_name} · {option.fraction * 100}% replacement · {option.recipe_reduction_pct.toFixed(1)}% reduction</option>)}</select>
-          <div className="impact-panel"><div className="impact-total"><span>Estimated recipe reduction</span><strong>{best.recipe_reduction_pct.toFixed(1)}<small>%</small></strong><p>{format(best.saved_kg_co2e)} kg CO₂e saved</p></div><div className="impact-comparison"><div><span>Original</span><strong>{format(best.before)} <small>kg CO₂e</small></strong><div className="impact-track"><i style={{ width: '100%' }} /></div></div><div><span>Adapted</span><strong>{format(best.after)} <small>kg CO₂e</small></strong><div className="impact-track adapted"><i style={{ width: `${best.before ? best.after / best.before * 100 : 0}%` }} /></div></div><p>Per serving: {format(result.original.per_serving_kg_co2e)} → {format(best.footprint.per_serving_kg_co2e)} kg CO₂e</p></div></div>
+          {result.message && <p className="coverage-notice no-alternative" role="status"><strong>{result.message}</strong></p>}
+          {result.coverage?.partial && <p className="coverage-notice" role="status"><strong>{result.coverage.label}</strong></p>}
+          <label htmlFor="alternative">Recommended option first — explore alternatives</label><select id="alternative" value={choice} onChange={e => setChoice(Number(e.target.value))}>{result.options.map((option, index) => <option key={`${option.target}-${option.fraction}`} value={index}>{option.target_name} · {option.fraction * 100}% replacement · {option.recipe_reduction_pct.toFixed(1)}% reduction{result.coverage?.partial ? ` — ${result.coverage.label}` : ''}</option>)}</select>
+          <div className="impact-panel" aria-label={result.coverage?.label || 'Recipe carbon comparison'}><div className="impact-total"><span>Estimated {result.coverage?.partial ? 'matched-ingredient' : 'recipe'} reduction</span><strong>{best.recipe_reduction_pct.toFixed(1)}<small>%</small></strong><p>{format(best.saved_kg_co2e)} kg CO₂e saved</p></div><div className="impact-comparison"><div><span>Original</span><strong>{format(best.before)} <small>kg CO₂e</small></strong><div className="impact-track"><i style={{ width: '100%' }} /></div></div><div><span>Adapted</span><strong>{format(best.after)} <small>kg CO₂e</small></strong><div className="impact-track adapted"><i style={{ width: `${best.before ? best.after / best.before * 100 : 0}%` }} /></div></div><p>Per serving: {format(result.original.per_serving_kg_co2e)} → {format(best.footprint.per_serving_kg_co2e)} kg CO₂e</p>{result.coverage?.partial && <p className="impact-coverage">{result.coverage.label} Unsupported ingredients are excluded; their emissions are unknown, not zero.</p>}</div></div>
           <div className="swap-note"><Leaf /><p>{best.fraction ? best.note : 'Keeping the original is a valid choice. Your preferences or the available evidence may rule out a suitable swap.'}</p></div>
-          <div className="section-heading"><h3>Your adapted ingredients</h3><button className="text-button" onClick={() => saveJson(best.recipe, 'adapted-recipe.json')}>Download recipe</button></div>
-          <div className="table-scroll"><table><caption className="sr-only">Original and adapted ingredient quantities in grams</caption><thead><tr><th>Ingredient</th><th>Original</th><th>Adapted</th></tr></thead><tbody>{ingredientComparison(result.recipe, best.recipe, catalogue.ingredients).map(row => <tr key={row.id} className={row.before !== row.after ? 'changed' : ''}><th scope="row">{row.name}<small>{row.state}</small></th><td>{format(row.before, 1)} g</td><td>{format(row.after, 1)} g</td></tr>)}</tbody></table></div>
+          <div className="section-heading"><h3>Your selected adaptation</h3><button className="text-button" onClick={() => saveJson(best.recipe, 'adapted-recipe.json')}>Download recipe</button></div>
+          <div className="table-scroll"><table><caption className="sr-only">Original and adapted ingredient quantities in grams</caption><thead><tr><th>Ingredient</th><th>Original</th><th>Adapted</th></tr></thead><tbody>{ingredientComparison(result.recipe, best.recipe, catalogue.ingredients).map(row => <tr key={row.id} className={row.before !== row.after ? 'changed' : ''}><th scope="row">{row.name}<small>{row.state || 'Unsupported — preserved, excluded from carbon estimates'}</small></th><td>{format(row.before, 1)} g</td><td>{format(row.after, 1)} g</td></tr>)}</tbody></table></div>
           <details className="evidence"><summary>Why this suggestion?</summary><p>{best.train_count} observed training substitutions. Evidence score: {best.evidence_score.toFixed(3)}.</p><p>Compound overlap: {best.chemical_similarity === null ? 'Not available' : `${best.chemical_similarity.toFixed(3)} Jaccard`}. Coverage: {best.chemical_coverage}.</p><p>The evidence score is not a taste probability. Savings under an illustrative ±20% factor stress test: {format(best.sensitivity.low)}–{format(best.sensitivity.high)} kg CO₂e. This is not a confidence interval.</p></details>
-          <details className="evidence"><summary>Original carbon contributions</summary><div className="contributions">{[...result.original.contributions].sort((a, b) => b.kg_co2e - a.kg_co2e).map(row => <div key={row.id}><span>{row.name}</span><div className="contribution-track"><i style={{ width: `${row.kg_co2e / result.original.total_kg_co2e * 100}%` }} /></div><span>{format(row.kg_co2e)} kg</span></div>)}</div></details>
-          <details className="evidence"><summary>All options & Pareto frontier</summary><div className="table-scroll"><table><thead><tr><th>Alternative</th><th>Replace</th><th>Reduction</th><th>Objective</th><th>Pareto</th></tr></thead><tbody>{result.options.map(option => <tr key={`${option.target}-${option.fraction}`}><th>{option.target_name}</th><td>{option.fraction * 100}%</td><td>{option.recipe_reduction_pct.toFixed(1)}%</td><td>{option.objective.toFixed(3)}</td><td>{option.pareto ? 'Yes' : 'No'}</td></tr>)}</tbody></table></div></details>
+          <details className="evidence"><summary>Original carbon contributions</summary>{result.coverage?.partial && <p>{result.coverage.label}</p>}<div className="contributions">{[...result.original.contributions].sort((a, b) => b.kg_co2e - a.kg_co2e).map(row => <div key={row.id}><span>{row.name}</span><div className="contribution-track"><i style={{ width: `${row.kg_co2e / result.original.total_kg_co2e * 100}%` }} /></div><span>{format(row.kg_co2e)} kg</span></div>)}</div></details>
+          <details className="evidence"><summary>All options & Pareto frontier</summary>{result.coverage?.partial && <p>{result.coverage.label}</p>}<div className="table-scroll"><table><thead><tr><th>Alternative</th><th>Replace</th><th>Reduction</th><th>Objective</th><th>Pareto</th></tr></thead><tbody>{result.options.map(option => <tr key={`${option.target}-${option.fraction}`}><th>{option.target_name}</th><td>{option.fraction * 100}%</td><td>{option.recipe_reduction_pct.toFixed(1)}%</td><td>{option.objective.toFixed(3)}</td><td>{option.pareto ? 'Yes' : 'No'}</td></tr>)}</tbody></table></div></details>
           <p className="small-note">Ingredient-level screening estimates using French-average factors. Cooking, texture, nutrition and taste need separate assessment.</p>
         </>}
       </section>

@@ -90,7 +90,9 @@ Relevant papers:
 
 ## Custom recipes
 
-Import JSON shaped like the following. The source quantity must match the mapped food state, and each row needs a role. Unknown IDs, zero/negative/non-finite masses and duplicate canonical ingredients are rejected. Catalogue aliases used in the benchmark do not imply validated quantity conversions.
+Import JSON shaped like the following. The source quantity must match the mapped food state, and each row needs a role. Zero/negative/non-finite masses, missing IDs or roles, and duplicate canonical ingredients are rejected. Catalogue aliases used in the benchmark do not imply validated quantity conversions.
+
+In the React Studio and API, rows whose IDs are not in the catalogue are accepted as unsupported: they are kept unchanged (ID, quantity and any extra fields) in the adapted recipe and download, but excluded from carbon calculations. Estimates and percentage reductions for such recipes are labelled with their coverage, for example “Matched ingredients only (5 of 10 original ingredients covered).” If no ingredient matches, no estimate is shown and swap analysis is disabled. The Streamlit app still requires every ingredient to be in the catalogue.
 
 ```json
 {

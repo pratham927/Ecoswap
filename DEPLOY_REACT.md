@@ -57,3 +57,9 @@ The GitHub Actions workflow runs engine/API regression tests, frontend state-hel
 - `GET /api/download/<name>`: allowlisted research downloads.
 
 Uploads are limited to 256 KB and 100 ingredients. Input errors return JSON. CORS is limited to configured origins. Carbon calculations always use the existing engine. The frontend only displays and compares returned estimates.
+
+Custom uploads may contain unsupported ingredient IDs. The catalogue includes recognized aliases; matching normalizes only recognized IDs. Every row still needs a valid ID, positive quantity in grams and cooking role. The Studio lists matched and unsupported ingredients and allows selecting any matched ingredient for replacement. Unsupported rows, including their quantities and extra fields, remain unchanged in each adapted recipe and JSON download.
+
+For partial uploads, only matched ingredients enter the engine. The API returns `coverage` with the original matched/total counts and a label such as “Matched ingredients only (5 of 10 original ingredients covered).” Before/after estimates and percentage savings use this same supported subset, even when a substitution changes the number of rows. Downloaded partial adaptations include `carbon_coverage` metadata. Unsupported emissions are unknown, not zero. Zero-match uploads return no carbon estimate and no options; the Studio disables analysis. If no suitable alternative satisfies the selected settings, the API returns a message and the keep-original option.
+
+Regression checks cover mixed, fully matched and zero-match uploads, all built-in presets, invalid quantities in unsupported rows, recognized aliases, and preservation of unsupported rows across every adapted download payload.
